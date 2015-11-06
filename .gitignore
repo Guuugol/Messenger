@@ -180,6 +180,11 @@ UpgradeLog*.htm
 *.bim.layout
 *.bim_*.settings
 
+
+# SQL Server files
+*.mdf
+*.ldf
+
 # Microsoft Fakes
 FakesAssemblies/
 
