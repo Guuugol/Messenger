@@ -1,0 +1,19 @@
+﻿<Window x:Class="WpfApplication1.ContactInformation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Contact Information" Height="300" Width="300" Background="#FF4D4A4A">
+    <Grid Background="#FF4D4A4A">
+        <TextBox x:Name="FirstName" Height="auto" Margin="152,39,10,215" TextWrapping="Wrap"/>
+        <TextBox x:Name="LastName" Height="auto" Margin="152,83,10,171" TextWrapping="Wrap"/>
+        <PasswordBox x:Name="Password" Margin="152,126,10,128" PasswordChar="*"/>        
+        <PasswordBox x:Name="ConfirmPassword" Margin="152,169,10,85" PasswordChar="*" />
+        <TextBox x:Name="Information" Margin="0,210,10,10" TextWrapping="Wrap" HorizontalAlignment="Right" Width="272"/>
+        <Label Content="First Name" Margin="152,17,10,234"/>
+        <Label Content="Last Name" Margin="152,58,10,190"/>
+        <Label Content="Password" Margin="152,102,10,147"/>
+        <Label Content="Confirm Password" Margin="152,145,10,104"/>
+        <Label Content="Information" Margin="152,188,10,63"/>
+        <Button Content="Apply" Margin="0,131,217,122"/>
+        <Button Content="Save" Margin="0,169,217,84"/>
+    </Grid>
+</Window>
