@@ -19,40 +19,40 @@ namespace WebService
     {
         static List<UserMap> Users = new List<UserMap>();
 
-        // Отправка сообщений
-        public void Send(string name, string message)
+        public void Send(string senderGuid,string recieverGuid, string message)
         {
-            Clients.All.addMessage(name, message);
+            var client=Clients.Client(Users.First(u=>u.Guid==recieverGuid).ConnectionId);
+            if(client!=null)
+                client.addMessage(senderGuid, message);
+            using (var DB=new MessengerEntities())
+            {
+                DB.Message.Add(new Message
+                {
+                    FromID = Guid.Parse(senderGuid),
+                    ToID = Guid.Parse(recieverGuid),
+                    Text = message
+                });
+            }
         }
 
-        // Подключение нового пользователя
         public void Connect(string Guid)
         {
             var id = Context.ConnectionId;
 
 
-            if (!Users.Any(x => x.ConnectionId == id))
+            if (Users.All(x => x.ConnectionId != id))
             {
                 Users.Add(new UserMap { ConnectionId = id, Guid = Guid });
-
-                // Посылаем сообщение текущему пользователю
-                Clients.Caller.onConnected(id, Guid, Users);
-
-                // Посылаем сообщение всем пользователям, кроме текущего
             }
         }
 
-        // Отключение пользователя
-        public override System.Threading.Tasks.Task OnDisconnected(bool stopCalled)
+        public override Task OnDisconnected(bool stopCalled)
         {
             var item = Users.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
             if (item != null)
             {
                 Users.Remove(item);
-                var id = Context.ConnectionId;
-                Clients.All.onUserDisconnected(id, item.Guid);
             }
-
             return base.OnDisconnected(stopCalled);
         }
     }
