@@ -4,9 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using Newtonsoft.Json;
-using Owin;
+using System.Diagnostics;
+using System.Web.Cors;
 using Microsoft.AspNet.SignalR;
-
+using Microsoft.AspNet.SignalR.Tracing;
+using Microsoft.Owin;
+using Microsoft.Owin.Cors;
+using Owin;
+[assembly: OwinStartup(typeof(WebService.Startup))]
 namespace WebService
 {
     /// <summary>
@@ -20,32 +25,41 @@ namespace WebService
     {
         public void Configuration(IAppBuilder app)
         {
-            app.MapSignalR(new HubConfiguration());
+            app.MapSignalR();
         }
     }
 
-    public class JsonResult
+
+
+    class JsonResult
     {
-        public JsonResult(string error)
+
+        public bool success { get; set; }
+        public string errorReason { get; set; }
+        public IEnumerable<Dictionary<string, object>> data { get; set; }
+
+        public JsonResult(string errorReason)
         {
+            this.errorReason = errorReason;
             success = false;
-            this.error = error;
         }
-        public JsonResult(Dictionary<string, object> data)
+
+        public JsonResult(IEnumerable<Dictionary<string, object>> data)
         {
             success = true;
-            error = null;
             this.data = data;
         }
-        public bool success { get; set; }
-        string error { get; set; }
-        Dictionary<string, object> data { get; set; }
+
+        public JsonResult()
+        {
+            success = false;
+        }
     }
 
 
     public class Service : System.Web.Services.WebService
     {
-        
+
         MessengerEntities DB = new MessengerEntities();
 
         
@@ -59,9 +73,7 @@ namespace WebService
                  jsonResult=new JsonResult("invalid nickname/password");
                 return JsonConvert.SerializeObject(jsonResult);
             }
-            Messenger messenger = new Messenger();
-            messenger.Register(user.ID);
-            jsonResult = new JsonResult(new Dictionary<string, object> {{"UserId",user.ID}});
+            jsonResult = new JsonResult(new  List<Dictionary<string, object>>{new Dictionary<string, object>{{"UserId",user.ID}}});
             return JsonConvert.SerializeObject(jsonResult);
         }
 
@@ -88,7 +100,7 @@ namespace WebService
                 jsonResult = new JsonResult("unknown error occured while adding a new record in data base");
                 return JsonConvert.SerializeObject(jsonResult);
             }
-            jsonResult = new JsonResult(new Dictionary<string, object>());
+            jsonResult = new JsonResult(new  List<Dictionary<string, object>>());
             return JsonConvert.SerializeObject(jsonResult);
         }
     }
