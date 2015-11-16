@@ -1,0 +1,22 @@
+﻿<Window x:Class="WpfApplication1.ContactInformation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Contact Information" Height="461" Background="#FF4D4A4A" ResizeMode="NoResize" Width="768">
+    <Grid Background="#FF4D4A4A" Margin="0,0,-5,-1">
+        <TextBox x:Name="Information" Height="auto"  Width="auto" Margin="303,303,10,10" TextWrapping="Wrap" FontSize="16" />
+        <Label Content="Information" Margin="509,268,10,132" Height="auto"  Width="auto" FontSize="16"/>
+        <Button Content="Save" Margin="10,303,614,88" Click="Button_Click" FontSize="16"/>
+        <TextBox x:Name="Login" Height="32" Margin="10,44,0,0" TextWrapping="Wrap"  Width="247" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Login" Margin="10,10,510,393" Height="auto"  Width="auto" FontSize="16"/>
+        <StackPanel HorizontalAlignment="Left" Height="263" Margin="436,0,0,0" VerticalAlignment="Top" Width="329">
+            <Label Content="First Name" Margin="10,0,39,0" Height="29"  Width="auto" FontSize="16"/>
+            <TextBox x:Name="FirstName" Height="32"  Width="auto" TextWrapping="Wrap" FontSize="16" Margin="10,0"/>
+            <Label Content="Last Name" Margin="10,0,39,0" Height="36"  Width="auto" FontSize="16"/>
+            <TextBox x:Name="LastName" Height="31"  Width="auto" Margin="10,0" TextWrapping="Wrap" FontSize="16"/>
+            <Label Content="Password" Margin="10,0,39,0" Height="35"  Width="auto" FontSize="16"/>
+            <PasswordBox x:Name="Password" Height="32"  Width="auto" Margin="10,0" PasswordChar="*" FontSize="16"/>
+            <Label Content="Confirm Password" Margin="10,0,39,0" Height="26"  Width="auto" FontSize="16"/>
+            <PasswordBox x:Name="ConfirmPassword" Height="32"  Width="auto" Margin="10,0" PasswordChar="*" FontSize="16" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -32,7 +32,7 @@ namespace WebService
 
 
 
-    internal class JsonResult
+    class JsonResult
     {
 
         public bool success { get; set; }
@@ -44,8 +44,8 @@ namespace WebService
             this.errorReason = errorReason;
             success = false;
         }
-
         public JsonResult(IEnumerable<Dictionary<string, object>> data)
+        
         {
             success = true;
             this.data = data;
@@ -55,6 +55,7 @@ namespace WebService
         {
             success = false;
         }
+        
     }
 
 
