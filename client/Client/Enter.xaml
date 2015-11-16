@@ -8,6 +8,7 @@
         <Label Content="Enter Password:" HorizontalAlignment="Left" Height="32" Margin="31,69,0,0" VerticalAlignment="Top" Width="238" FontSize="16"/>
         <PasswordBox x:Name="pbPassword" HorizontalAlignment="Left" Margin="31,106,0,0" VerticalAlignment="Top" Height="34" Width="238" FontSize="16"/>
         <Button x:Name="btnEnter" Content="Enter" HorizontalAlignment="Left" Margin="169,197,0,0" VerticalAlignment="Top" Width="114" RenderTransformOrigin="0.32,0.45" Height="49" FontSize="16" Click="btnEnter_Click"/>
+        <Button x:Name="btnSignUp" Content="Sign up" HorizontalAlignment="Left" Height="49" Margin="31,197,0,0" VerticalAlignment="Top" Width="113" FontSize="16" Click="btnSignUp_Click"/>
 
     </Grid>
 </Window>

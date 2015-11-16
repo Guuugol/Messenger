@@ -31,15 +31,17 @@ namespace WebService
             success = false;
             this.error = error;
         }
+        
         public JsonResult(Dictionary<string, object> data)
         {
             success = true;
             error = null;
             this.data = data;
         }
+
         public bool success { get; set; }
         string error { get; set; }
-        Dictionary<string, object> data { get; set; }
+        public Dictionary<string, object> data { get; set; }
     }
 
 
