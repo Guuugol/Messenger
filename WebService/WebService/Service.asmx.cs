@@ -162,7 +162,7 @@ namespace WebService
         }*/
 
         [WebMethod]
-        public string AddNewContact(string contactNickname)
+        public string AddNewContact(Guid userId,string contactNickname)
         {
             try
             {
@@ -170,7 +170,9 @@ namespace WebService
                 DB.Contact.Add(new Contact
                 {
                     ContactID = contact.ID,
+                    UserID = userId
                 });
+                DB.SaveChanges();
                 return JsonConvert.SerializeObject(new JsonResult(new List<Dictionary<string, object>>()));
             }
             catch (Exception)
