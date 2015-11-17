@@ -53,6 +53,7 @@
       <s:element name="AddNewContact">
         <s:complexType>
           <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userId" type="s1:guid" />
             <s:element minOccurs="0" maxOccurs="1" name="contactNickname" type="s:string" />
           </s:sequence>
         </s:complexType>

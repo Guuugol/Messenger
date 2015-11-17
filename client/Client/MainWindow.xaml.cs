@@ -24,15 +24,17 @@ namespace WpfApplication1
     public partial class MainWindow : Window
     {
 
-        public static List<User> Contacts; 
+        public static List<User> Contacts;
+        public Guid CurrentUserId;
 
         public void RefreshContacts()
         {
-            var data = App.ServerClient.GetUserContacts(App.CurrentUserId);
+            var data = App.ServerClient.GetUserContacts(CurrentUserId);
             Contacts.Clear();
+           
             foreach (var user in data.Select(dict => new User
             {
-                ID = Guid.Parse((string)dict["userID"]),
+                ID = Guid.Parse((string)dict["userId"]),
                 Nickname = (string)dict["nickname"],
                 FirstName = (string)dict["firstName"],
                 LastName = (string)dict["lastName"],
@@ -50,8 +52,9 @@ namespace WpfApplication1
         }
 
         
-        public MainWindow()
+        public MainWindow(Guid userId)
         {
+            CurrentUserId = userId;
             InitializeComponent();
             Contacts = new List<User>();
             RefreshContacts();
@@ -61,7 +64,7 @@ namespace WpfApplication1
 
         private void AddContact_Click(object sender, RoutedEventArgs e)
         {
-            var addNewContact = new AddNewContact(this);
+            var addNewContact = new AddNewContact(this, CurrentUserId);
             addNewContact.ShowDialog();
             RefreshContacts();
 
