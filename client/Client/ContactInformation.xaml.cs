@@ -47,7 +47,7 @@ namespace WpfApplication1
                 return;
             }
 
-            bool res =  App.serverClient.Register(login, password, firstName, lastName, info);
+            bool res =  App.ServerClient.Register(login, password, firstName, lastName, info);
 
             if (!res)
             {
@@ -66,6 +66,11 @@ namespace WpfApplication1
             }
 
 
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

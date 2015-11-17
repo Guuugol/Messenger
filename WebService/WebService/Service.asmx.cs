@@ -80,7 +80,7 @@ namespace WebService
                 new Dictionary<string, object>
                 {
                     {"userId", user.ID},
-                    {"firstName", user.FirstName},
+                    {"firstName", user.FirstName}, 
                     {"lastName", user.LastName},
                     {"info", user.Info}
                 }
@@ -138,7 +138,7 @@ namespace WebService
             }
             return JsonConvert.SerializeObject(new JsonResult(data));
         }
-
+/*
         [WebMethod]
         public string AddNewContact(Guid userGuid, string contactNickname, string name)
         {
@@ -150,6 +150,26 @@ namespace WebService
                     UserID = userGuid,
                     ContactID = contact.ID,
                     Name = name
+                });
+                return JsonConvert.SerializeObject(new JsonResult(new List<Dictionary<string, object>>()));
+            }
+            catch (Exception)
+            {
+                return
+                    JsonConvert.SerializeObject(
+                        new JsonResult("unknown error occured while adding a new record in data base"));
+            }
+        }*/
+
+        [WebMethod]
+        public string AddNewContact(string contactNickname)
+        {
+            try
+            {
+                User contact = DB.User.First(u => u.Nickname == contactNickname);
+                DB.Contact.Add(new Contact
+                {
+                    ContactID = contact.ID,
                 });
                 return JsonConvert.SerializeObject(new JsonResult(new List<Dictionary<string, object>>()));
             }

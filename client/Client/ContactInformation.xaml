@@ -18,5 +18,6 @@
             <Label Content="Confirm Password" Margin="10,0,39,0" Height="26"  Width="auto" FontSize="16"/>
             <PasswordBox x:Name="ConfirmPassword" Height="32"  Width="auto" Margin="10,0" PasswordChar="*" FontSize="16" />
         </StackPanel>
+        <Button x:Name="btnCancel" Content="Cancel" Margin="10,363,614,24" FontSize="16" Click="btnCancel_Click"/>
     </Grid>
 </Window>

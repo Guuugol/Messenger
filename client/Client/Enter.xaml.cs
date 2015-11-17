@@ -31,7 +31,7 @@ namespace Client
         {
             string login = tbLogin.Text;
             string password = pbPassword.Password;
-            Guid? result =  App.serverClient.Authorize(login, password);
+            Guid? result =  App.ServerClient.Authorize(login, password);
             if (result == null)
             {
                 MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -40,19 +40,21 @@ namespace Client
             }
             else
             {
-                App.currentUserId = (Guid) result;
+                App.CurrentUserId = (Guid) result;
                 this.Hide();
-                MainWindow contatcs = new MainWindow();
+                var contatcs = new MainWindow();
                 contatcs.Activate();
+                contatcs.Show();
+                this.Close();
             }
         }
 
         private void btnSignUp_Click(object sender, RoutedEventArgs e)
         {
-            ContactInformation register = new ContactInformation();
+            var register = new ContactInformation();
             this.Hide();
             register.Activate();
-            register.Show();
+            register.ShowDialog();
             this.Show();
         }
 

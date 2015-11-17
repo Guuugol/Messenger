@@ -28,6 +28,41 @@ namespace Client.Server {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Register", ReplyAction="*")]
         System.Threading.Tasks.Task<Client.Server.RegisterResponse> RegisterAsync(Client.Server.RegisterRequest request);
+        
+        // CODEGEN: Контракт генерации сообщений с именем GetUserContactsResult из пространства имен http://tempuri.org/ не отмечен как обнуляемый
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserContacts", ReplyAction="*")]
+        Client.Server.GetUserContactsResponse GetUserContacts(Client.Server.GetUserContactsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserContacts", ReplyAction="*")]
+        System.Threading.Tasks.Task<Client.Server.GetUserContactsResponse> GetUserContactsAsync(Client.Server.GetUserContactsRequest request);
+        
+        // CODEGEN: Контракт генерации сообщений с именем contactNickname из пространства имен http://tempuri.org/ не отмечен как обнуляемый
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddNewContact", ReplyAction="*")]
+        Client.Server.AddNewContactResponse AddNewContact(Client.Server.AddNewContactRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddNewContact", ReplyAction="*")]
+        System.Threading.Tasks.Task<Client.Server.AddNewContactResponse> AddNewContactAsync(Client.Server.AddNewContactRequest request);
+        
+        // CODEGEN: Контракт генерации сообщений с именем DeleteContactResult из пространства имен http://tempuri.org/ не отмечен как обнуляемый
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteContact", ReplyAction="*")]
+        Client.Server.DeleteContactResponse DeleteContact(Client.Server.DeleteContactRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteContact", ReplyAction="*")]
+        System.Threading.Tasks.Task<Client.Server.DeleteContactResponse> DeleteContactAsync(Client.Server.DeleteContactRequest request);
+        
+        // CODEGEN: Контракт генерации сообщений с именем GetMessageHistoryResult из пространства имен http://tempuri.org/ не отмечен как обнуляемый
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetMessageHistory", ReplyAction="*")]
+        Client.Server.GetMessageHistoryResponse GetMessageHistory(Client.Server.GetMessageHistoryRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetMessageHistory", ReplyAction="*")]
+        System.Threading.Tasks.Task<Client.Server.GetMessageHistoryResponse> GetMessageHistoryAsync(Client.Server.GetMessageHistoryRequest request);
+        
+        // CODEGEN: Контракт генерации сообщений с именем GetUserByGuidResult из пространства имен http://tempuri.org/ не отмечен как обнуляемый
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserByGuid", ReplyAction="*")]
+        Client.Server.GetUserByGuidResponse GetUserByGuid(Client.Server.GetUserByGuidRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserByGuid", ReplyAction="*")]
+        System.Threading.Tasks.Task<Client.Server.GetUserByGuidResponse> GetUserByGuidAsync(Client.Server.GetUserByGuidRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -186,6 +221,354 @@ namespace Client.Server {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetUserContactsRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserContacts", Namespace="http://tempuri.org/", Order=0)]
+        public Client.Server.GetUserContactsRequestBody Body;
+        
+        public GetUserContactsRequest() {
+        }
+        
+        public GetUserContactsRequest(Client.Server.GetUserContactsRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetUserContactsRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public System.Guid guid;
+        
+        public GetUserContactsRequestBody() {
+        }
+        
+        public GetUserContactsRequestBody(System.Guid guid) {
+            this.guid = guid;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetUserContactsResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserContactsResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Client.Server.GetUserContactsResponseBody Body;
+        
+        public GetUserContactsResponse() {
+        }
+        
+        public GetUserContactsResponse(Client.Server.GetUserContactsResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetUserContactsResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GetUserContactsResult;
+        
+        public GetUserContactsResponseBody() {
+        }
+        
+        public GetUserContactsResponseBody(string GetUserContactsResult) {
+            this.GetUserContactsResult = GetUserContactsResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AddNewContactRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="AddNewContact", Namespace="http://tempuri.org/", Order=0)]
+        public Client.Server.AddNewContactRequestBody Body;
+        
+        public AddNewContactRequest() {
+        }
+        
+        public AddNewContactRequest(Client.Server.AddNewContactRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class AddNewContactRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string contactNickname;
+        
+        public AddNewContactRequestBody() {
+        }
+        
+        public AddNewContactRequestBody(string contactNickname) {
+            this.contactNickname = contactNickname;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AddNewContactResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="AddNewContactResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Client.Server.AddNewContactResponseBody Body;
+        
+        public AddNewContactResponse() {
+        }
+        
+        public AddNewContactResponse(Client.Server.AddNewContactResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class AddNewContactResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string AddNewContactResult;
+        
+        public AddNewContactResponseBody() {
+        }
+        
+        public AddNewContactResponseBody(string AddNewContactResult) {
+            this.AddNewContactResult = AddNewContactResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class DeleteContactRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="DeleteContact", Namespace="http://tempuri.org/", Order=0)]
+        public Client.Server.DeleteContactRequestBody Body;
+        
+        public DeleteContactRequest() {
+        }
+        
+        public DeleteContactRequest(Client.Server.DeleteContactRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class DeleteContactRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public System.Guid userGuid;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public System.Guid contactGuid;
+        
+        public DeleteContactRequestBody() {
+        }
+        
+        public DeleteContactRequestBody(System.Guid userGuid, System.Guid contactGuid) {
+            this.userGuid = userGuid;
+            this.contactGuid = contactGuid;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class DeleteContactResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="DeleteContactResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Client.Server.DeleteContactResponseBody Body;
+        
+        public DeleteContactResponse() {
+        }
+        
+        public DeleteContactResponse(Client.Server.DeleteContactResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class DeleteContactResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string DeleteContactResult;
+        
+        public DeleteContactResponseBody() {
+        }
+        
+        public DeleteContactResponseBody(string DeleteContactResult) {
+            this.DeleteContactResult = DeleteContactResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetMessageHistoryRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetMessageHistory", Namespace="http://tempuri.org/", Order=0)]
+        public Client.Server.GetMessageHistoryRequestBody Body;
+        
+        public GetMessageHistoryRequest() {
+        }
+        
+        public GetMessageHistoryRequest(Client.Server.GetMessageHistoryRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetMessageHistoryRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public System.Guid userGuid;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public System.Guid contactGuid;
+        
+        public GetMessageHistoryRequestBody() {
+        }
+        
+        public GetMessageHistoryRequestBody(System.Guid userGuid, System.Guid contactGuid) {
+            this.userGuid = userGuid;
+            this.contactGuid = contactGuid;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetMessageHistoryResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetMessageHistoryResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Client.Server.GetMessageHistoryResponseBody Body;
+        
+        public GetMessageHistoryResponse() {
+        }
+        
+        public GetMessageHistoryResponse(Client.Server.GetMessageHistoryResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetMessageHistoryResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GetMessageHistoryResult;
+        
+        public GetMessageHistoryResponseBody() {
+        }
+        
+        public GetMessageHistoryResponseBody(string GetMessageHistoryResult) {
+            this.GetMessageHistoryResult = GetMessageHistoryResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetUserByGuidRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserByGuid", Namespace="http://tempuri.org/", Order=0)]
+        public Client.Server.GetUserByGuidRequestBody Body;
+        
+        public GetUserByGuidRequest() {
+        }
+        
+        public GetUserByGuidRequest(Client.Server.GetUserByGuidRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetUserByGuidRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public System.Guid guid;
+        
+        public GetUserByGuidRequestBody() {
+        }
+        
+        public GetUserByGuidRequestBody(System.Guid guid) {
+            this.guid = guid;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetUserByGuidResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserByGuidResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Client.Server.GetUserByGuidResponseBody Body;
+        
+        public GetUserByGuidResponse() {
+        }
+        
+        public GetUserByGuidResponse(Client.Server.GetUserByGuidResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetUserByGuidResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GetUserByGuidResult;
+        
+        public GetUserByGuidResponseBody() {
+        }
+        
+        public GetUserByGuidResponseBody(string GetUserByGuidResult) {
+            this.GetUserByGuidResult = GetUserByGuidResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ServiceSoapChannel : Client.Server.ServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -271,6 +654,135 @@ namespace Client.Server {
             inValue.Body.lastName = lastName;
             inValue.Body.info = info;
             return ((Client.Server.ServiceSoap)(this)).RegisterAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Client.Server.GetUserContactsResponse Client.Server.ServiceSoap.GetUserContacts(Client.Server.GetUserContactsRequest request) {
+            return base.Channel.GetUserContacts(request);
+        }
+        
+        public string GetUserContacts(System.Guid guid) {
+            Client.Server.GetUserContactsRequest inValue = new Client.Server.GetUserContactsRequest();
+            inValue.Body = new Client.Server.GetUserContactsRequestBody();
+            inValue.Body.guid = guid;
+            Client.Server.GetUserContactsResponse retVal = ((Client.Server.ServiceSoap)(this)).GetUserContacts(inValue);
+            return retVal.Body.GetUserContactsResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Client.Server.GetUserContactsResponse> Client.Server.ServiceSoap.GetUserContactsAsync(Client.Server.GetUserContactsRequest request) {
+            return base.Channel.GetUserContactsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Client.Server.GetUserContactsResponse> GetUserContactsAsync(System.Guid guid) {
+            Client.Server.GetUserContactsRequest inValue = new Client.Server.GetUserContactsRequest();
+            inValue.Body = new Client.Server.GetUserContactsRequestBody();
+            inValue.Body.guid = guid;
+            return ((Client.Server.ServiceSoap)(this)).GetUserContactsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Client.Server.AddNewContactResponse Client.Server.ServiceSoap.AddNewContact(Client.Server.AddNewContactRequest request) {
+            return base.Channel.AddNewContact(request);
+        }
+        
+        public string AddNewContact(string contactNickname) {
+            Client.Server.AddNewContactRequest inValue = new Client.Server.AddNewContactRequest();
+            inValue.Body = new Client.Server.AddNewContactRequestBody();
+            inValue.Body.contactNickname = contactNickname;
+            Client.Server.AddNewContactResponse retVal = ((Client.Server.ServiceSoap)(this)).AddNewContact(inValue);
+            return retVal.Body.AddNewContactResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Client.Server.AddNewContactResponse> Client.Server.ServiceSoap.AddNewContactAsync(Client.Server.AddNewContactRequest request) {
+            return base.Channel.AddNewContactAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Client.Server.AddNewContactResponse> AddNewContactAsync(string contactNickname) {
+            Client.Server.AddNewContactRequest inValue = new Client.Server.AddNewContactRequest();
+            inValue.Body = new Client.Server.AddNewContactRequestBody();
+            inValue.Body.contactNickname = contactNickname;
+            return ((Client.Server.ServiceSoap)(this)).AddNewContactAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Client.Server.DeleteContactResponse Client.Server.ServiceSoap.DeleteContact(Client.Server.DeleteContactRequest request) {
+            return base.Channel.DeleteContact(request);
+        }
+        
+        public string DeleteContact(System.Guid userGuid, System.Guid contactGuid) {
+            Client.Server.DeleteContactRequest inValue = new Client.Server.DeleteContactRequest();
+            inValue.Body = new Client.Server.DeleteContactRequestBody();
+            inValue.Body.userGuid = userGuid;
+            inValue.Body.contactGuid = contactGuid;
+            Client.Server.DeleteContactResponse retVal = ((Client.Server.ServiceSoap)(this)).DeleteContact(inValue);
+            return retVal.Body.DeleteContactResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Client.Server.DeleteContactResponse> Client.Server.ServiceSoap.DeleteContactAsync(Client.Server.DeleteContactRequest request) {
+            return base.Channel.DeleteContactAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Client.Server.DeleteContactResponse> DeleteContactAsync(System.Guid userGuid, System.Guid contactGuid) {
+            Client.Server.DeleteContactRequest inValue = new Client.Server.DeleteContactRequest();
+            inValue.Body = new Client.Server.DeleteContactRequestBody();
+            inValue.Body.userGuid = userGuid;
+            inValue.Body.contactGuid = contactGuid;
+            return ((Client.Server.ServiceSoap)(this)).DeleteContactAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Client.Server.GetMessageHistoryResponse Client.Server.ServiceSoap.GetMessageHistory(Client.Server.GetMessageHistoryRequest request) {
+            return base.Channel.GetMessageHistory(request);
+        }
+        
+        public string GetMessageHistory(System.Guid userGuid, System.Guid contactGuid) {
+            Client.Server.GetMessageHistoryRequest inValue = new Client.Server.GetMessageHistoryRequest();
+            inValue.Body = new Client.Server.GetMessageHistoryRequestBody();
+            inValue.Body.userGuid = userGuid;
+            inValue.Body.contactGuid = contactGuid;
+            Client.Server.GetMessageHistoryResponse retVal = ((Client.Server.ServiceSoap)(this)).GetMessageHistory(inValue);
+            return retVal.Body.GetMessageHistoryResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Client.Server.GetMessageHistoryResponse> Client.Server.ServiceSoap.GetMessageHistoryAsync(Client.Server.GetMessageHistoryRequest request) {
+            return base.Channel.GetMessageHistoryAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Client.Server.GetMessageHistoryResponse> GetMessageHistoryAsync(System.Guid userGuid, System.Guid contactGuid) {
+            Client.Server.GetMessageHistoryRequest inValue = new Client.Server.GetMessageHistoryRequest();
+            inValue.Body = new Client.Server.GetMessageHistoryRequestBody();
+            inValue.Body.userGuid = userGuid;
+            inValue.Body.contactGuid = contactGuid;
+            return ((Client.Server.ServiceSoap)(this)).GetMessageHistoryAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Client.Server.GetUserByGuidResponse Client.Server.ServiceSoap.GetUserByGuid(Client.Server.GetUserByGuidRequest request) {
+            return base.Channel.GetUserByGuid(request);
+        }
+        
+        public string GetUserByGuid(System.Guid guid) {
+            Client.Server.GetUserByGuidRequest inValue = new Client.Server.GetUserByGuidRequest();
+            inValue.Body = new Client.Server.GetUserByGuidRequestBody();
+            inValue.Body.guid = guid;
+            Client.Server.GetUserByGuidResponse retVal = ((Client.Server.ServiceSoap)(this)).GetUserByGuid(inValue);
+            return retVal.Body.GetUserByGuidResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Client.Server.GetUserByGuidResponse> Client.Server.ServiceSoap.GetUserByGuidAsync(Client.Server.GetUserByGuidRequest request) {
+            return base.Channel.GetUserByGuidAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Client.Server.GetUserByGuidResponse> GetUserByGuidAsync(System.Guid guid) {
+            Client.Server.GetUserByGuidRequest inValue = new Client.Server.GetUserByGuidRequest();
+            inValue.Body = new Client.Server.GetUserByGuidRequestBody();
+            inValue.Body.guid = guid;
+            return ((Client.Server.ServiceSoap)(this)).GetUserByGuidAsync(inValue);
         }
     }
 }

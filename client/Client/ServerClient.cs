@@ -26,8 +26,8 @@ namespace Client
         }*/
 
         public bool success { get; set; }
-        public string error { get; set; }
-        public Dictionary<string, object> data { get; set; }
+        public string errorReason { get; set; }
+        public IEnumerable<Dictionary<string, object>> data { get; set; }
     }
 
     public class ServerClient
@@ -48,11 +48,15 @@ namespace Client
                 //int index = json.IndexOf("UserId", StringComparison.Ordinal) + 2;
                 //string result = json.Substring(index, 36);
                 //return result;
-                Guid id = (Guid) res.data["UserId"];
+                //res.data.First().ContainsKey("userId");
+                Dictionary<string, object> dataDictionary = new Dictionary<string, object>(res.data.First());
+                string idString = (string) dataDictionary["userId"];
+                Guid id = Guid.Parse(idString);
                 return id;
             }
             else
             {
+                
                 return null;
             }
         }
@@ -63,6 +67,20 @@ namespace Client
             var res = JsonConvert.DeserializeObject<JsonResult>(json);
             return res.success;
 
+        }
+
+        public IEnumerable<Dictionary<string, object>> GetUserContacts(Guid userId)
+        {
+            var json = serverClient.GetUserContacts(userId);
+            JsonResult res = JsonConvert.DeserializeObject<JsonResult>(json);
+            return res.data;
+        }
+
+        public bool AddNewContact(string login)
+        {
+            var json = serverClient.AddNewContact(login);
+            var res = JsonConvert.DeserializeObject<JsonResult>(json);
+            return res.success;
         }
     }
 }
