@@ -32,6 +32,7 @@ namespace WebService
                     ToID = Guid.Parse(recieverGuid),
                     Text = message
                 });
+                DB.SaveChanges();
             }
         }
 
@@ -44,6 +45,7 @@ namespace WebService
             {
                 Users.Add(new UserMap { ConnectionId = id, Guid = Guid });
             }
+            Clients.Caller.onConnected(id, Guid, Users);
         }
 
         public override Task OnDisconnected(bool stopCalled)

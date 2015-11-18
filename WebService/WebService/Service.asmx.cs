@@ -62,7 +62,7 @@ namespace WebService
     public class Service : System.Web.Services.WebService
     {
 
-        private MessengerEntities DB = new MessengerEntities();
+        private readonly MessengerEntities DB = new MessengerEntities();
 
 
         [WebMethod]
