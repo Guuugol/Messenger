@@ -56,7 +56,7 @@ namespace Client
             var result = App.ServerClient.AddNewContact(login, CurrentUserId);
             if (!result)
             {
-                MessageBox.Show("Невозможно добавиьт пользователя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Невозможно добавить пользователя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 TbLoginBox.Clear();
             }
             else

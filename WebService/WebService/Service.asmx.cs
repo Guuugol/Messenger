@@ -170,7 +170,8 @@ namespace WebService
                 DB.Contact.Add(new Contact
                 {
                     ContactID = contact.ID,
-                    UserID = userId
+                    UserID = userId,
+                    ID = Guid.NewGuid()
                 });
                 DB.SaveChanges();
                 return JsonConvert.SerializeObject(new JsonResult(new List<Dictionary<string, object>>()));

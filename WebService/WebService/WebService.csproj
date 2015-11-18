@@ -133,6 +133,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DBConn.cs" />
     <Compile Include="Hub.cs" />
     <Compile Include="Message.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>

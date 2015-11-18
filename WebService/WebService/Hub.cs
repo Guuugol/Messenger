@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using WebService;
+
 
 namespace WebService
 {
@@ -30,10 +32,17 @@ namespace WebService
                 {
                     FromID = Guid.Parse(senderGuid),
                     ToID = Guid.Parse(recieverGuid),
-                    Text = message
+                    Text = message,
+                    ID = Guid.NewGuid()
                 });
+                DB.SaveChanges();
+
+                //DBConn.AddToDb(senderGuid, recieverGuid, message);
+
             }
-        }
+
+
+    }
 
         public void Connect(string Guid)
         {

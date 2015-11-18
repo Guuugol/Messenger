@@ -21,17 +21,39 @@ namespace WpfApplication1
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+    public class UserContact
+    {
+        public UserContact(string name, Guid id)
+        {
+            Name = name;
+            Id = id;
+        }
+
+        public UserContact(UserContact user)
+        {
+            Name = user.Name;
+        }
+
+        public String Name { get; set; }
+        private Guid Id { get; set; }
+    }
+    
     public partial class MainWindow : Window
     {
 
+        
+        
         public static List<User> Contacts;
         public Guid CurrentUserId;
+        public static List<UserContact> NicknameList; 
+
+       // 
 
         public void RefreshContacts()
         {
             var data = App.ServerClient.GetUserContacts(CurrentUserId);
             Contacts.Clear();
-           
+            NicknameList.Clear();
             foreach (var user in data.Select(dict => new User
             {
                 ID = Guid.Parse((string)dict["userId"]),
@@ -46,7 +68,7 @@ namespace WpfApplication1
 
             foreach (var user in Contacts)
             {
-                
+                NicknameList.Add(new UserContact(user.Nickname, user.ID) );
             }
             
         }
@@ -57,9 +79,11 @@ namespace WpfApplication1
             CurrentUserId = userId;
             InitializeComponent();
             Contacts = new List<User>();
+            NicknameList = new List<UserContact>();
             RefreshContacts();
-            //ContactGrid.DataContext = App.Contacts;
-            ContactGrid.ItemsSource = Contacts;
+           // ContactGrid.DataContext = Contacts;
+            ContactGrid.ItemsSource = NicknameList;
+            
         }
 
         private void AddContact_Click(object sender, RoutedEventArgs e)
@@ -68,6 +92,21 @@ namespace WpfApplication1
             addNewContact.ShowDialog();
             RefreshContacts();
 
+        }
+
+        private void ContactGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            UserContact contact = new UserContact( (UserContact) ContactGrid.SelectedCells.First().Item);
+            string login = contact.Name;
+            foreach (var cont in Contacts)
+            {
+                if (cont.Nickname == login)
+                {
+                    Chat chat = new Chat(CurrentUserId, cont.ID);
+                    chat.Show();
+                    break;
+                }
+            }
         }
 
     }

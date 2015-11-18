@@ -7,7 +7,7 @@
             <RowDefinition Height="51*"/>
             <RowDefinition Height="310*"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="ContactGrid" Grid.Row="1"/>
+        <DataGrid x:Name="ContactGrid" Grid.Row="1" FontSize="24" Grid.Column="1" Grid.ColumnSpan="4" CanUserResizeRows="False" MouseDoubleClick="ContactGrid_MouseDoubleClick"/>
         <ToolBarPanel Grid.Row="0" x:Name="Panel1" HorizontalAlignment="Center" Height="auto" VerticalAlignment="Top" Background="#FF4D4A4A" Orientation="Horizontal">
             <Button x:Name="AddContact" Content="Add" HorizontalAlignment="Left" Width="100"  Height="26" Margin="0,12,0,13" Click="AddContact_Click"  />
             <Button x:Name="ShowContact" Content="Show" HorizontalAlignment="Center" Width="100" Height="26" Margin="0,12,0,13"  />

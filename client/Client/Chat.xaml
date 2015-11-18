@@ -1,12 +1,11 @@
 ﻿<Window x:Class="WpfApplication1.Chat"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Chat" Height="407" Width="631">
+        Title="Chat" Height="407" Width="631" ResizeMode="NoResize">
     <Grid Background="#FF4D4A4A">
-        <TextBlock x:Name="ChatBlock" Height="266" Margin="0,10,25,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFF5ECEC" HorizontalAlignment="Right" Width="574"/>
-        <TextBlock x:Name="MessageBlock" Height="77" Margin="0,293,25,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FFF1E6E6" HorizontalAlignment="Right" Width="574"><InlineUIContainer>
-        		<Button x:Name="Send" Content="Send" Height="76" Width="101"/>
-        	</InlineUIContainer></TextBlock>
+        <TextBlock x:Name="ChatBlock" Margin="24,10,25,104" TextWrapping="Wrap" Background="#FFF5ECEC"/>
+        <TextBox x:Name="MessageBlock" Margin="125,293,25,10" TextWrapping="Wrap" Background="#FFF1E6E6"/>
+        <Button x:Name="Send" Content="Send" Height="76" Width="101" Click="Send_Click" Margin="24,296,500,10"/>
         <Label x:Name ="NameLabel" Content="Contact Name" HorizontalAlignment="Left" Height="27" Margin="68,-22,0,0" VerticalAlignment="Top" Width="222"/>
 
     </Grid>
