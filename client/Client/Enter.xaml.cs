@@ -22,6 +22,8 @@ namespace Client
     {
         public new string Name = "EnterPage";
 
+        private Guid userId;
+
         public Enter()
         {
             InitializeComponent();
@@ -40,9 +42,9 @@ namespace Client
             }
             else
             {
-                App.CurrentUserId = (Guid) result;
+                userId = (Guid) result;
                 this.Hide();
-                var contatcs = new MainWindow();
+                var contatcs = new MainWindow(userId);
                 contatcs.Activate();
                 contatcs.Show();
                 this.Close();

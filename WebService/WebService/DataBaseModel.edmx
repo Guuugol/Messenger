@@ -14,13 +14,9 @@
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\IVANOV\MESSENGER\WEBSERVICE\WEBSERVICE\APP_DATA\MESSENGER.MDF.dbo.Message' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Message">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="FromID" />
-            <PropertyRef Name="ToID" />
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FromID" Type="uniqueidentifier" Nullable="false" />
@@ -96,49 +92,11 @@ warning 6002: The table/view 'C:\IVANOV\MESSENGER\WEBSERVICE\WEBSERVICE\APP_DATA
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="MessengerModelStoreContainer">
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Message" EntityType="Self.Message" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Message].[ID] AS [ID], 
-    [Message].[FromID] AS [FromID], 
-    [Message].[ToID] AS [ToID], 
-    [Message].[Text] AS [Text]
-    FROM [dbo].[Message] AS [Message]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Contact_User" Association="Self.FK_Contact_User">
             <End Role="User" EntitySet="User" />
             <End Role="Contact" EntitySet="Contact" />
@@ -172,6 +130,17 @@ warning 6002: The table/view 'C:\IVANOV\MESSENGER\WEBSERVICE\WEBSERVICE\APP_DATA
           <NavigationProperty Name="User" Relationship="Self.FK_Contact_User" FromRole="Contact" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK_Contact_User1" FromRole="Contact" ToRole="User" />
         </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="FromID" Type="Guid" Nullable="false" />
+          <Property Name="ToID" Type="Guid" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Message_FromID" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Message_ToID" FromRole="Message" ToRole="User" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -196,19 +165,6 @@ warning 6002: The table/view 'C:\IVANOV\MESSENGER\WEBSERVICE\WEBSERVICE\APP_DATA
           <NavigationProperty Name="Contact1" Relationship="Self.FK_Contact_User1" FromRole="User" ToRole="Contact" />
           <NavigationProperty Name="Message" Relationship="Self.FK_Message_FromID" FromRole="User" ToRole="Message" />
           <NavigationProperty Name="Message1" Relationship="Self.FK_Message_ToID" FromRole="User" ToRole="Message" />
-        </EntityType>
-        <EntityType Name="Message">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="FromID" />
-            <PropertyRef Name="ToID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="FromID" Type="Guid" Nullable="false" />
-          <Property Name="ToID" Type="Guid" Nullable="false" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Message_FromID" FromRole="Message" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="Self.FK_Message_ToID" FromRole="Message" ToRole="User" />
         </EntityType>
         <Association Name="FK_Contact_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -258,11 +214,11 @@ warning 6002: The table/view 'C:\IVANOV\MESSENGER\WEBSERVICE\WEBSERVICE\APP_DATA
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MessengerEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MessengerEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Contact" EntityType="Self.Contact" />
+          <EntitySet Name="Message" EntityType="Self.Message" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="Message" EntityType="Self.Message" />
           <AssociationSet Name="FK_Contact_User" Association="Self.FK_Contact_User">
             <End Role="User" EntitySet="User" />
             <End Role="Contact" EntitySet="Contact" />
@@ -279,43 +235,13 @@ warning 6002: The table/view 'C:\IVANOV\MESSENGER\WEBSERVICE\WEBSERVICE\APP_DATA
             <End Role="User" EntitySet="User" />
             <End Role="Message" EntitySet="Message" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MessengerModelStoreContainer" CdmEntityContainer="MessengerEntities">
+        <EntityContainerMapping StorageEntityContainer="MessengerModelStoreContainer" CdmEntityContainer="MessengerEntities1">
           <EntitySetMapping Name="Contact">
             <EntityTypeMapping TypeName="MessengerModel.Contact">
               <MappingFragment StoreEntitySet="Contact">
@@ -323,6 +249,16 @@ warning 6002: The table/view 'C:\IVANOV\MESSENGER\WEBSERVICE\WEBSERVICE\APP_DATA
                 <ScalarProperty Name="ContactID" ColumnName="ContactID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Message">
+            <EntityTypeMapping TypeName="MessengerModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FromID" ColumnName="FromID" />
+                <ScalarProperty Name="ToID" ColumnName="ToID" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -349,23 +285,6 @@ warning 6002: The table/view 'C:\IVANOV\MESSENGER\WEBSERVICE\WEBSERVICE\APP_DATA
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Message">
-            <EntityTypeMapping TypeName="MessengerModel.Message">
-              <MappingFragment StoreEntitySet="Message">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="FromID" ColumnName="FromID" />
-                <ScalarProperty Name="ToID" ColumnName="ToID" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MessengerModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MessengerModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MessengerModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="MessengerModel.Store.sp_helpdiagramdefinition" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="MessengerModel.Store.sp_helpdiagrams" />
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MessengerModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MessengerModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

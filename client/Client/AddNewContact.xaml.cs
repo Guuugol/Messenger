@@ -23,9 +23,12 @@ namespace Client
 
         public MainWindow MainWindow;
 
-        public AddNewContact(MainWindow mainWindow)
+        private Guid CurrentUserId;
+
+        public AddNewContact(MainWindow mainWindow, Guid userId)
         {
             MainWindow = mainWindow;
+            CurrentUserId = userId;
             InitializeComponent();
         }
 
@@ -50,10 +53,10 @@ namespace Client
                     TbLoginBox.Clear();
                 }
             }
-            var result = App.ServerClient.AddNewContact(login);
+            var result = App.ServerClient.AddNewContact(login, CurrentUserId);
             if (!result)
             {
-                MessageBox.Show("Невозможно добавиьт пользователя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Невозможно добавить пользователя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 TbLoginBox.Clear();
             }
             else

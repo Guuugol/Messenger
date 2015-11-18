@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Client.Server;
 using Newtonsoft.Json;
+using WpfApplication1;
 
 
 namespace Client
@@ -12,7 +13,13 @@ namespace Client
 
     public class JsonResult
     {
-       /* [JsonConstructor]
+        public JsonResult(IEnumerable<Dictionary<string, object>> data)
+        {
+            success = true;
+            this.data = data;
+        }
+
+        /* [JsonConstructor]
         public JsonResult(string json)
         {
             success = !json.Contains("false");
@@ -76,11 +83,19 @@ namespace Client
             return res.data;
         }
 
-        public bool AddNewContact(string login)
+        public bool AddNewContact(string login, Guid userId)
         {
-            var json = serverClient.AddNewContact(login);
+            var json = serverClient.AddNewContact(userId, login);
             var res = JsonConvert.DeserializeObject<JsonResult>(json);
             return res.success;
+        }
+
+
+        public List<Dictionary<string, object>> GetMessageHistory(Guid userGuid, Guid contactGuid)
+        {
+            var json = serverClient.GetMessageHistory(userGuid, contactGuid);
+            var res = JsonConvert.DeserializeObject<JsonResult>(json);
+            return (List<Dictionary<string, object>>) res.data;
         }
     }
 }
