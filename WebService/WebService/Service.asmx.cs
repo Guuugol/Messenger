@@ -91,7 +91,7 @@ namespace WebService
         [WebMethod]
         public string Register(string nickname, string password, string firstName, string lastName, string info)
         {
-            if (DB.User.Any(u => u.Nickname == nickname))
+            if (DB.User.Any() && DB.User.Any(u => u.Nickname == nickname))
                 return JsonConvert.SerializeObject(new JsonResult("another user have the same nickname"));
             User user = new User
             {
