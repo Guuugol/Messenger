@@ -47,13 +47,13 @@ namespace WpfApplication1
         {
             Dispatcher.BeginInvoke(new ThreadStart(delegate
             {
-                ChatBlock.Text = "";
+                ChatBlock.Document.Blocks.Clear();
                 foreach (var message in MessageHistory)
                 {
                     Guid from = Guid.Parse((string) message["fromId"]);
                     Guid to = Guid.Parse((string) message["toId"]);
                     string text = (string) message["text"];
-                    ChatBlock.Text = ChatBlock.Text + text + "\n";
+                    ChatBlock.AppendText(text + "\n");
 
                 }
             }));
@@ -81,7 +81,7 @@ namespace WpfApplication1
             await hubProxy.Invoke("Connect", UserId.ToString());
             hubProxy.On<string, string>("addMessage", (senderGuid, message) =>
             {
-                Dispatcher.BeginInvoke(new ThreadStart(delegate { ChatBlock.Text = ChatBlock.Text + message + "\n"; }));
+                this.Dispatcher.Invoke(()=> ChatBlock.AppendText(message + "\n") );
                 //refresh();
             });
         }
