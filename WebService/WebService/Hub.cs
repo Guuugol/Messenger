@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.SignalR;
-using WebService;
 
 
 namespace WebService
@@ -19,39 +16,68 @@ namespace WebService
 
     public class ChatHub : Hub
     {
-        static List<UserMap> Users = new List<UserMap>();
+        public static readonly List<UserMap> Users = new List<UserMap>();
 
         public void Send(string senderGuid,string recieverGuid, string message)
         {
             var client=Clients.Client(Users.First(u=>u.Guid==recieverGuid).ConnectionId);
-            if(client!=null)
-                client.addMessage(senderGuid, message);
-            using (var DB=new MessengerEntities())
+            bool recieved;
+            if (client != null)
             {
-                DB.Message.Add(new Message
+                client.addMessage(senderGuid, message);
+                recieved = true;
+            }
+            else
+                recieved = false;
+            using (var db=new MessengerEntities())
+            {
+                db.Message.Add(new Message
                 {
                     FromID = Guid.Parse(senderGuid),
                     ToID = Guid.Parse(recieverGuid),
                     Text = message,
-                    ID = Guid.NewGuid()
+                    ID = Guid.NewGuid(),
+                    Recieved = (byte)(recieved?1:0)
+
                 });
-                DB.SaveChanges();
+                db.SaveChanges();
 
             }
 
 
     }
 
-        public void Connect(string Guid)
+        public void Connect(string guid)
         {
             var id = Context.ConnectionId;
 
 
             if (Users.All(x => x.ConnectionId != id))
             {
-                Users.Add(new UserMap { ConnectionId = id, Guid = Guid });
+                Users.Add(new UserMap { ConnectionId = id, Guid = guid });
             }
-            Clients.Caller.onConnected(id, Guid, Users);
+            Clients.Caller.onConnected(id, guid, Users);
+            Guid userGuid = Guid.Parse(guid);
+            using (var db = new MessengerEntities())
+            {
+                foreach (var reciever in (from u in db.User
+                                          from c in db.Contact
+                                          where ((u.ID == c.UserID) && (c.ContactID == userGuid))
+                                          select u))
+                {
+                    string recieverGuid = reciever.ID.ToString();
+                    var recieverMapRecord = Users.FirstOrDefault(u => u.Guid == recieverGuid);
+                    if (recieverMapRecord != null)
+                    {
+                        string recieverConnectionId = recieverMapRecord.ConnectionId;
+                        var recieverHubDescriptor = Clients.Client(recieverConnectionId);
+                        if (recieverHubDescriptor != null)
+                        {
+                            recieverHubDescriptor.onContactConnected(guid);
+                        }
+                    }
+                }
+            }
         }
 
         public override Task OnDisconnected(bool stopCalled)
@@ -59,6 +85,28 @@ namespace WebService
             var item = Users.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
             if (item != null)
             {
+                
+                Guid userGuid=Guid.Parse(item.Guid);
+                using (var db = new MessengerEntities())
+                {
+                    foreach (var reciever in (from u in db.User
+                        from c in db.Contact
+                        where ((u.ID == c.UserID) && (c.ContactID == userGuid))
+                        select u))
+                    {
+                        string recieverGuid = reciever.ID.ToString();
+                        var recieverMapRecord = Users.FirstOrDefault(u => u.Guid == recieverGuid);
+                        if (recieverMapRecord != null)
+                        {
+                            string recieverConnectionId = recieverMapRecord.ConnectionId;
+                            var recieverHubDescriptor= Clients.Client(recieverConnectionId);
+                            if (recieverHubDescriptor != null)
+                            {
+                                recieverHubDescriptor.onContactDisconnected(item.Guid);
+                            }
+                        }
+                    }
+                }
                 Users.Remove(item);
             }
             return base.OnDisconnected(stopCalled);

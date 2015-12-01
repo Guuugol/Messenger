@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MessengerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MessengerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Contact">
           <Key>
             <PropertyRef Name="ID" />
@@ -22,6 +22,7 @@
           <Property Name="FromID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ToID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Text" Type="text" />
+          <Property Name="Recieved" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -114,8 +115,7 @@
             <End Role="Message" EntitySet="Message" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MessengerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -140,6 +140,7 @@
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_Message_FromID" FromRole="Message" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK_Message_ToID" FromRole="Message" ToRole="User" />
+          <Property Name="Recieved" Type="Byte" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -255,6 +256,7 @@
           <EntitySetMapping Name="Message">
             <EntityTypeMapping TypeName="MessengerModel.Message">
               <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Recieved" ColumnName="Recieved" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FromID" ColumnName="FromID" />
                 <ScalarProperty Name="ToID" ColumnName="ToID" />

@@ -18,6 +18,7 @@ namespace WebService
         public System.Guid FromID { get; set; }
         public System.Guid ToID { get; set; }
         public string Text { get; set; }
+        public byte Recieved { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

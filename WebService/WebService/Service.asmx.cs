@@ -62,13 +62,13 @@ namespace WebService
     public class Service : System.Web.Services.WebService
     {
 
-        private readonly MessengerEntities DB = new MessengerEntities();
+        private readonly MessengerEntities _db = new MessengerEntities();
 
 
         [WebMethod]
         public string Authorize(string nickname, string password)
         {
-            User user = DB.User.FirstOrDefault(u => ((u.Nickname == nickname) && (u.Password == password)));
+            User user = _db.User.FirstOrDefault(u => ((u.Nickname == nickname) && (u.Password == password)));
             JsonResult jsonResult;
             if (user == null)
             {
@@ -91,7 +91,7 @@ namespace WebService
         [WebMethod]
         public string Register(string nickname, string password, string firstName, string lastName, string info)
         {
-            if (DB.User.Any() && DB.User.Any(u => u.Nickname == nickname))
+            if (_db.User.Any() && _db.User.Any(u => u.Nickname == nickname))
                 return JsonConvert.SerializeObject(new JsonResult("another user have the same nickname"));
             User user = new User
             {
@@ -105,8 +105,8 @@ namespace WebService
             JsonResult jsonResult;
             try
             {
-                DB.User.Add(user);
-                DB.SaveChanges();
+                _db.User.Add(user);
+                _db.SaveChanges();
             }
             catch (Exception)
             {
@@ -121,19 +121,21 @@ namespace WebService
         public string GetUserContacts(Guid guid)
         {
             List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
-            var contacts = from u in DB.User
-                from c in DB.Contact
+            var contacts = from u in _db.User
+                from c in _db.Contact
                 where ((u.ID == c.ContactID) && (c.UserID == guid))
                 select u;
             foreach (var contact in contacts)
             {
+                string userGuid = contact.ID.ToString();
                 data.Add(new Dictionary<string, object>
                 {
                     {"userId", contact.ID},
                     {"firstName", contact.FirstName},
                     {"lastName", contact.LastName},
                     {"info", contact.Info},
-                    {"nickname", contact.Nickname}
+                    {"nickname", contact.Nickname},
+                    {"online",ChatHub.Users.Any(u=>u.Guid==userGuid)}
                 });
             }
             return JsonConvert.SerializeObject(new JsonResult(data));
@@ -166,14 +168,14 @@ namespace WebService
         {
             try
             {
-                User contact = DB.User.First(u => u.Nickname == contactNickname);
-                DB.Contact.Add(new Contact
+                User contact = _db.User.First(u => u.Nickname == contactNickname);
+                _db.Contact.Add(new Contact
                 {
                     ContactID = contact.ID,
                     UserID = userId,
                     ID = Guid.NewGuid()
                 });
-                DB.SaveChanges();
+                _db.SaveChanges();
                 return JsonConvert.SerializeObject(new JsonResult(new List<Dictionary<string, object>>()));
             }
             catch (Exception)
@@ -189,7 +191,7 @@ namespace WebService
         {
             try
             {
-                DB.Contact.Remove(DB.Contact.First(c => ((c.UserID == userGuid) && (c.ContactID == contactGuid))));
+                _db.Contact.Remove(_db.Contact.First(c => ((c.UserID == userGuid) && (c.ContactID == contactGuid))));
                 return JsonConvert.SerializeObject(new JsonResult(new List<Dictionary<string, object>>()));
             }
             catch (Exception)
@@ -209,7 +211,7 @@ namespace WebService
             {
                 foreach (
                     var message in
-                        DB.Message.Where(
+                        _db.Message.Where(
                             m =>
                                 (((m.FromID == userGuid) && (m.ToID == contactGuid)) ||
                                  ((m.ToID == userGuid) && (m.FromID == contactGuid)))))
@@ -218,7 +220,8 @@ namespace WebService
                     {
                         {"fromId", message.FromID},
                         {"toId", message.ToID},
-                        {"text", message.Text}
+                        {"text", message.Text},
+                        {"recieved",message.Recieved}
                     });
                 }
                 return JsonConvert.SerializeObject(new JsonResult(data));
@@ -238,7 +241,7 @@ namespace WebService
         {
             try
             {
-                User user = DB.User.First(u => u.ID == guid);
+                User user = _db.User.First(u => u.ID == guid);
                 List<Dictionary<string,object>> data=new List<Dictionary<string, object>>
                 {
                     new Dictionary<string, object>
