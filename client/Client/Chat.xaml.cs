@@ -30,7 +30,7 @@ namespace WpfApplication1
 
         public HubConnection hubConnection;
         public IHubProxy hubProxy;
-
+        
         public Chat(Guid userId ,Guid contactId)
         {
             InitializeComponent();
@@ -45,17 +45,31 @@ namespace WpfApplication1
 
         public void refresh()
         {
-            ChatBlock.Text = "";
+            Dispatcher.BeginInvoke(new ThreadStart(delegate
+            {
+                ChatBlock.Text = "";
+                foreach (var message in MessageHistory)
+                {
+                    Guid from = Guid.Parse((string) message["fromId"]);
+                    Guid to = Guid.Parse((string) message["toId"]);
+                    string text = (string) message["text"];
+                    ChatBlock.Text = ChatBlock.Text + text + "\n";
+
+                }
+            }));
+
+
+
+            /*ChatBlock.Text = "";
             foreach (var message in MessageHistory)
             {
                 Guid from = Guid.Parse((string) message["fromId"]);
                 Guid to = Guid.Parse((string) message["toId"]);
                 string text = (string) message["text"];
-                if (from == UserId)
-                {
-                    ChatBlock.Text = ChatBlock.Text + text + "\n";
-                }
-            }
+                ChatBlock.Text = ChatBlock.Text + text + "\n";
+                
+            }*/
+
         }
 
         public async void startConnection()
@@ -65,11 +79,16 @@ namespace WpfApplication1
 
             await hubConnection.Start();
             await hubProxy.Invoke("Connect", UserId.ToString());
+            hubProxy.On<string, string>("addMessage", (senderGuid, message) =>
+            {
+                Dispatcher.BeginInvoke(new ThreadStart(delegate { ChatBlock.Text = ChatBlock.Text + message + "\n"; }));
+                //refresh();
+            });
         }
 
         async private void Send_Click(object sender, RoutedEventArgs e)
         {
-            string message = MessageBlock.Text;
+            string messageText = MessageBlock.Text;
 
             /*Connection connection = new HubConnection("http://localhost:5661/signalr");*/
 
@@ -78,7 +97,7 @@ namespace WpfApplication1
             {
                 {"fromId", UserId},
                 {"toId", ContactId},
-                {"text", message}
+                {"text", messageText}
             });
 
           /*connection.Start();
@@ -90,11 +109,19 @@ namespace WpfApplication1
 
             await hubConnection.Start();*/
             //await hubProxy.Invoke("Connect", UserId.ToString());
-            await hubProxy.Invoke("Send", new String[] {UserId.ToString(), ContactId.ToString(), message});
+            await hubProxy.Invoke("Send", new String[] {UserId.ToString(), ContactId.ToString(), messageText});
+            /*hubProxy.On<string, string>("send", (senderGuid, message) =>
+            {
+                //ChatBlock.Text = ChatBlock.Text + message + "\n";
+                refresh();
+            });*/
             MessageBlock.Clear();
             refresh();
 
         }
+
+
+
     }
 }
 
