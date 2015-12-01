@@ -47,7 +47,7 @@ namespace WpfApplication1
         {
             Dispatcher.BeginInvoke(new ThreadStart(delegate
             {
-                ChatBlock.Document.Blocks.Clear();
+                //ChatBlock.Document.Blocks.Clear();
                 foreach (var message in MessageHistory)
                 {
                     Guid from = Guid.Parse((string) message["fromId"]);
@@ -89,6 +89,7 @@ namespace WpfApplication1
         async private void Send_Click(object sender, RoutedEventArgs e)
         {
             string messageText = MessageBlock.Text;
+            ChatBlock.AppendText(messageText);
 
             /*Connection connection = new HubConnection("http://localhost:5661/signalr");*/
 
@@ -116,7 +117,7 @@ namespace WpfApplication1
                 refresh();
             });*/
             MessageBlock.Clear();
-            refresh();
+            //refresh();
 
         }
 
