@@ -33,7 +33,7 @@ namespace Client
         {
             string login = tbLogin.Text;
             string password = pbPassword.Password;
-            Guid? result =  App.ServerClient.Authorize(login, password);
+            Guid? result =  MainWindow.ServerClient.Authorize(login, password);
             if (result == null)
             {
                 MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

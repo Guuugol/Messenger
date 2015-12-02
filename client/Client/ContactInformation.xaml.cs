@@ -47,7 +47,7 @@ namespace WpfApplication1
                 return;
             }
 
-            bool res =  App.ServerClient.Register(login, password, firstName, lastName, info);
+            bool res =  MainWindow.ServerClient.Register(login, password, firstName, lastName, info);
 
             if (!res)
             {

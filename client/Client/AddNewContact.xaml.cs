@@ -53,7 +53,7 @@ namespace Client
                     TbLoginBox.Clear();
                 }
             }
-            var result = App.ServerClient.AddNewContact(login, CurrentUserId);
+            var result = MainWindow.ServerClient.AddNewContact(login, CurrentUserId);
             if (!result)
             {
                 MessageBox.Show("Невозможно добавить пользователя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

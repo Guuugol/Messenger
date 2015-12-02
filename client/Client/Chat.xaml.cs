@@ -37,7 +37,7 @@ namespace WpfApplication1
             ContactId = contactId;
             UserId = userId;
             MessageHistory = new List<Dictionary<string, object>>();
-            MessageHistory = App.ServerClient.GetMessageHistory(UserId, ContactId);
+            MessageHistory = MainWindow.ServerClient.GetMessageHistory(UserId, ContactId);
             refresh();
             startConnection();
 
@@ -47,28 +47,16 @@ namespace WpfApplication1
         {
             Dispatcher.BeginInvoke(new ThreadStart(delegate
             {
-                //ChatBlock.Document.Blocks.Clear();
                 foreach (var message in MessageHistory)
                 {
                     Guid from = Guid.Parse((string) message["fromId"]);
                     Guid to = Guid.Parse((string) message["toId"]);
                     string text = (string) message["text"];
+                    byte recieved = (byte) message["recieved"]; 
                     ChatBlock.AppendText(text + "\n");
 
                 }
             }));
-
-
-
-            /*ChatBlock.Text = "";
-            foreach (var message in MessageHistory)
-            {
-                Guid from = Guid.Parse((string) message["fromId"]);
-                Guid to = Guid.Parse((string) message["toId"]);
-                string text = (string) message["text"];
-                ChatBlock.Text = ChatBlock.Text + text + "\n";
-                
-            }*/
 
         }
 
@@ -82,7 +70,6 @@ namespace WpfApplication1
             hubProxy.On<string, string>("addMessage", (senderGuid, message) =>
             {
                 this.Dispatcher.Invoke(()=> ChatBlock.AppendText(message + "\n") );
-                //refresh();
             });
         }
 
@@ -101,23 +88,10 @@ namespace WpfApplication1
                 {"text", messageText}
             });
 
-          /*connection.Start();
-
-            connection.Stop();*/
-
-           /* var hubConnection = new HubConnection("http://localhost:5661/signalr");
-            IHubProxy hubProxy = hubConnection.CreateHubProxy("ChatHub");
-
-            await hubConnection.Start();*/
-            //await hubProxy.Invoke("Connect", UserId.ToString());
             await hubProxy.Invoke("Send", new String[] {UserId.ToString(), ContactId.ToString(), messageText});
-            /*hubProxy.On<string, string>("send", (senderGuid, message) =>
-            {
-                //ChatBlock.Text = ChatBlock.Text + message + "\n";
-                refresh();
-            });*/
+
             MessageBlock.Clear();
-            //refresh();
+
 
         }
 
@@ -126,17 +100,3 @@ namespace WpfApplication1
     }
 }
 
-
-/*async private Task startConnection()
-{
-  var hubConnection = new HubConnection("http://localhost:25024/signalr");
-  IHubProxy hubProxy = hubConnection.CreateHubProxy("VoteHub");
-  var context = SynchronizationContext.Current;
-  hubProxy.On<string, string>("updateVoteResults", (id, votes) =>
-    context.Post(delegate {
-   // Обновляем UI
-); }, null));                        
-  await hubConnection.Start();
-  await hubProxy.Invoke("vote", "rachel",
-    Convert.ToDecimal(itemId.Text));
-}*/

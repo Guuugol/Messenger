@@ -21,7 +21,7 @@ namespace WpfApplication1
     
     public partial class App : Application
     {
-        public static ServerClient ServerClient = new ServerClient();
+        
 
         //public static Guid CurrentUserId;
 

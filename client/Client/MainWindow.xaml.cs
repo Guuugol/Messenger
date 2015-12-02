@@ -18,6 +18,7 @@ using Client;
 
 namespace WpfApplication1
 {
+    
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -40,7 +41,7 @@ namespace WpfApplication1
     
     public partial class MainWindow : Window
     {
-
+        public static ServerClient ServerClient = new ServerClient();
         
         
         public static List<User> Contacts;
@@ -51,7 +52,7 @@ namespace WpfApplication1
 
         public void RefreshContacts()
         {
-            var data = App.ServerClient.GetUserContacts(CurrentUserId);
+            var data = ServerClient.GetUserContacts(CurrentUserId);
             Contacts.Clear();
             NicknameList.Clear();
             foreach (var user in data.Select(dict => new User
