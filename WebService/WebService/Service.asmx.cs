@@ -214,7 +214,7 @@ namespace WebService
                         _db.Message.Where(
                             m =>
                                 (((m.FromID == userGuid) && (m.ToID == contactGuid)) ||
-                                 ((m.ToID == userGuid) && (m.FromID == contactGuid)))))
+                                 ((m.ToID == userGuid) && (m.FromID == contactGuid)))).OrderBy(m=>m.Date_time))
                 {
                     data.Add(new Dictionary<string, object>
                     {

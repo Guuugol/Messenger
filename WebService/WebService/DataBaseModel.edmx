@@ -23,6 +23,7 @@
           <Property Name="ToID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Text" Type="text" />
           <Property Name="Recieved" Type="tinyint" Nullable="false" />
+          <Property Name="Date_time" Type="datetime" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -141,6 +142,7 @@
           <NavigationProperty Name="User" Relationship="Self.FK_Message_FromID" FromRole="Message" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK_Message_ToID" FromRole="Message" ToRole="User" />
           <Property Name="Recieved" Type="Byte" Nullable="false" />
+          <Property Name="Date_time" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -256,6 +258,7 @@
           <EntitySetMapping Name="Message">
             <EntityTypeMapping TypeName="MessengerModel.Message">
               <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Date_time" ColumnName="Date_time" />
                 <ScalarProperty Name="Recieved" ColumnName="Recieved" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FromID" ColumnName="FromID" />

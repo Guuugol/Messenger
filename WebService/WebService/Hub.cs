@@ -37,8 +37,8 @@ namespace WebService
                     ToID = Guid.Parse(recieverGuid),
                     Text = message,
                     ID = Guid.NewGuid(),
-                    Recieved = (byte)(recieved?1:0)
-
+                    Recieved = (byte)(recieved?1:0),
+                    Date_time = DateTime.Now
                 });
                 db.SaveChanges();
 
