@@ -26,6 +26,7 @@ namespace WpfApplication1
     {
         public Guid ContactId;
         public Guid UserId;
+        public String ContactNick;
         private List<Dictionary<string, object>> MessageHistory;
 
         public HubConnection hubConnection;
@@ -52,8 +53,10 @@ namespace WpfApplication1
                     Guid from = Guid.Parse((string) message["fromId"]);
                     Guid to = Guid.Parse((string) message["toId"]);
                     string text = (string) message["text"];
-                    byte recieved = (byte) message["recieved"]; 
-                    ChatBlock.AppendText(text + "\n");
+                    var recieved = message["recieved"];
+                    var fullText = from == ContactId ? ContactNick + ": " : "Я: ";
+                    fullText += text;
+                    ChatBlock.AppendText(fullText + "\n");
 
                 }
             }));
@@ -69,7 +72,9 @@ namespace WpfApplication1
             await hubProxy.Invoke("Connect", UserId.ToString());
             hubProxy.On<string, string>("addMessage", (senderGuid, message) =>
             {
-                this.Dispatcher.Invoke(()=> ChatBlock.AppendText(message + "\n") );
+                var fullText = "Я: ";
+                fullText += message;
+                this.Dispatcher.Invoke(()=> ChatBlock.AppendText(fullText + "\n") );
             });
         }
 

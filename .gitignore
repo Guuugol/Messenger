@@ -182,7 +182,8 @@ UpgradeLog*.htm
 
 
 # SQL Server files
-
+*.mdf
+*.ldf
 
 # Microsoft Fakes
 FakesAssemblies/
