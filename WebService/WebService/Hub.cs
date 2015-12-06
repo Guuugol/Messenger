@@ -20,10 +20,10 @@ namespace WebService
 
         public void Send(string senderGuid,string recieverGuid, string message)
         {
-            var client=Clients.Client(Users.First(u=>u.Guid==recieverGuid).ConnectionId);
+            var user = Users.FirstOrDefault(u => u.Guid == recieverGuid);
             bool recieved;
-            if (client != null)
-            {
+            if (user != null) { 
+            var client=Clients.Client(user.ConnectionId);
                 client.addMessage(senderGuid, message);
                 recieved = true;
             }
@@ -52,7 +52,7 @@ namespace WebService
             var id = Context.ConnectionId;
 
 
-            if (Users.All(x => x.ConnectionId != id))
+            if ((Users.All(x => x.ConnectionId != id)) && (Users.All(x => x.Guid != guid)))
             {
                 Users.Add(new UserMap { ConnectionId = id, Guid = guid });
             }
