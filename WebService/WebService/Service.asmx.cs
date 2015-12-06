@@ -216,6 +216,7 @@ namespace WebService
                                 (((m.FromID == userGuid) && (m.ToID == contactGuid)) ||
                                  ((m.ToID == userGuid) && (m.FromID == contactGuid)))).OrderBy(m=>m.Date_time))
                 {
+                    message.Recieved = 1;
                     data.Add(new Dictionary<string, object>
                     {
                         {"fromId", message.FromID},
@@ -224,6 +225,7 @@ namespace WebService
                         {"recieved",message.Recieved}
                     });
                 }
+                _db.SaveChanges();
                 return JsonConvert.SerializeObject(new JsonResult(data));
             }
             catch (Exception)
