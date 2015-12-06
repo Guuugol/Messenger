@@ -22,7 +22,7 @@ namespace Client
     {
         public new string Name = "EnterPage";
 
-        private Guid userId;
+        private Guid _userId;
 
         public Enter()
         {
@@ -31,20 +31,20 @@ namespace Client
 
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
-            string login = tbLogin.Text;
-            string password = pbPassword.Password;
+            string login = TbLogin.Text;
+            string password = PbPassword.Password;
             Guid? result =  MainWindow.ServerClient.Authorize(login, password);
             if (result == null)
             {
                 MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                tbLogin.Clear();
-                pbPassword.Clear();
+                TbLogin.Clear();
+                PbPassword.Clear();
             }
             else
             {
-                userId = (Guid) result;
+                _userId = (Guid) result;
                 this.Hide();
-                var contatcs = new MainWindow(userId);
+                var contatcs = new MainWindow(_userId);
                 contatcs.Activate();
                 contatcs.Show();
                 this.Close();

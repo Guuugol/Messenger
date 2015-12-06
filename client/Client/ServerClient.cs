@@ -15,8 +15,8 @@ namespace Client
     {
         public JsonResult(IEnumerable<Dictionary<string, object>> data)
         {
-            success = true;
-            this.data = data;
+            Success = true;
+            this.Data = data;
         }
 
         /* [JsonConstructor]
@@ -32,31 +32,31 @@ namespace Client
             this.data = data;
         }*/
 
-        public bool success { get; set; }
-        public string errorReason { get; set; }
-        public IEnumerable<Dictionary<string, object>> data { get; set; }
+        public bool Success { get; set; }
+        public string ErrorReason { get; set; }
+        public IEnumerable<Dictionary<string, object>> Data { get; set; }
     }
 
     public class ServerClient
     {
-        private Client.Server.ServiceSoapClient serverClient;
+        private Client.Server.ServiceSoapClient _serverClient;
 
         public ServerClient()
         {
-            this.serverClient = new ServiceSoapClient();
+            this._serverClient = new ServiceSoapClient();
         }
 
         public Guid? Authorize(string nickname, string password)
         {
-            var json = serverClient.Authorize(nickname, password);
+            var json = _serverClient.Authorize(nickname, password);
             JsonResult res = JsonConvert.DeserializeObject<JsonResult>(json);
-            if (res.success)
+            if (res.Success)
             {
                 //int index = json.IndexOf("UserId", StringComparison.Ordinal) + 2;
                 //string result = json.Substring(index, 36);
                 //return result;
                 //res.data.First().ContainsKey("userId");
-                Dictionary<string, object> dataDictionary = new Dictionary<string, object>(res.data.First());
+                Dictionary<string, object> dataDictionary = new Dictionary<string, object>(res.Data.First());
                 string idString = (string) dataDictionary["userId"];
                 Guid id = Guid.Parse(idString);
                 return id;
@@ -70,32 +70,32 @@ namespace Client
 
         public bool Register(string nickname, string password, string firstName, string lastName, string info)
         {
-            var json = serverClient.Register(nickname, password, firstName, lastName, info);
+            var json = _serverClient.Register(nickname, password, firstName, lastName, info);
             var res = JsonConvert.DeserializeObject<JsonResult>(json);
-            return res.success;
+            return res.Success;
 
         }
 
         public IEnumerable<Dictionary<string, object>> GetUserContacts(Guid userId)
         {
-            var json = serverClient.GetUserContacts(userId);
+            var json = _serverClient.GetUserContacts(userId);
             JsonResult res = JsonConvert.DeserializeObject<JsonResult>(json);
-            return res.data;
+            return res.Data;
         }
 
-        public bool AddNewContact(string login, Guid userId)
+        public bool AddNewContact(string login, Guid userId, string nickname)
         {
-            var json = serverClient.AddNewContact(userId, login);
+            var json = _serverClient.AddNewContact(userId, login, nickname);
             var res = JsonConvert.DeserializeObject<JsonResult>(json);
-            return res.success;
+            return res.Success;
         }
 
 
         public List<Dictionary<string, object>> GetMessageHistory(Guid userGuid, Guid contactGuid)
         {
-            var json = serverClient.GetMessageHistory(userGuid, contactGuid);
+            var json = _serverClient.GetMessageHistory(userGuid, contactGuid);
             var res = JsonConvert.DeserializeObject<JsonResult>(json);
-            return (List<Dictionary<string, object>>) res.data;
+            return (List<Dictionary<string, object>>) res.Data;
         }
     }
 }
