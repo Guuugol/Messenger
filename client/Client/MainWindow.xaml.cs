@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -65,7 +66,7 @@ namespace WpfApplication1
         
         public static List<User> Contacts;
         public Guid CurrentUserId;
-        public static List<UserContact> NicknameList; 
+        public  ObservableCollection<UserContact> NicknameList; 
 
        // 
 
@@ -101,7 +102,7 @@ namespace WpfApplication1
             CurrentUserId = userId;
             InitializeComponent();
             Contacts = new List<User>();
-            NicknameList = new List<UserContact>();
+            NicknameList = new ObservableCollection<UserContact>();
             RefreshContacts();
            // ContactGrid.DataContext = Contacts;
             //ContactGrid.ItemsSource = NicknameList;
@@ -116,23 +117,6 @@ namespace WpfApplication1
 
         }
 
-        
-
-
-        /*private void SetDataGrid(List<Dictionary<string, object>> users)
-        {
-            if (users == null || !users.Any()) return;
-            var userlist = users.Select(item => new UserContact()
-            {
-                Id = Guid.Parse((string)item["User_id"]),
-                Nickname = (string)item["Nickname"],
-                FirstName = (string)item["FirstName"],
-                LastName = (string)item["LastName"],
-                Online = (string)item["Online"]
-            }).ToList();
-            ((ArrayList)ContactListView.Resources["Users"]).AddRange(userlist);
-            ContactListView.ItemsSource = userlist;
-        }*/
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
@@ -152,10 +136,6 @@ namespace WpfApplication1
                     break;
                 }
             }
-        }
-    
-    
+        } 
     }
-
-
 }
