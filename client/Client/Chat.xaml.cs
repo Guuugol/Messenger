@@ -1,23 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Client;
 using Microsoft.AspNet.SignalR.Client;
-using Newtonsoft.Json;
 
-namespace WpfApplication1
+namespace Client
 {
     /// <summary>
     /// Логика взаимодействия для Chat.xaml
@@ -28,15 +15,19 @@ namespace WpfApplication1
         public Guid UserId;
         public String ContactNick;
         private readonly List<Dictionary<string, object>> _messageHistory;
+        private MainWindow parent;
 
         public HubConnection HubConnection;
         public IHubProxy HubProxy;
         
-        public Chat(Guid userId ,Guid contactId)
+        public Chat(Guid userId ,Guid contactId, string contactNickname, MainWindow parentMainWindow)
         {
             InitializeComponent();
             ContactId = contactId;
             UserId = userId;
+            ContactNick = contactNickname;
+            NameLabel.Content = contactNickname;
+            parent = parentMainWindow;
             _messageHistory = new List<Dictionary<string, object>>();
             _messageHistory = MainWindow.ServerClient.GetMessageHistory(UserId, ContactId);
             Refresh();
@@ -90,7 +81,7 @@ namespace WpfApplication1
         {
             string messageText = MessageBlock.Text;
             string fullText = "Я: " + messageText;
-            ChatBlock.AppendText(fullText);
+            ChatBlock.AppendText(fullText + "\n");
 
             /*Connection connection = new HubConnection("http://localhost:5661/signalr");*/
 
@@ -107,6 +98,11 @@ namespace WpfApplication1
             MessageBlock.Clear();
 
 
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            parent.ChatStartedGuids.Remove(ContactId);
         }
 
 

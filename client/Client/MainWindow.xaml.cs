@@ -2,23 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Client;
+using Microsoft.AspNet.SignalR.Client;
+using Microsoft.AspNet.SignalR.Client.Hubs;
 
-namespace WpfApplication1
+namespace Client
 {
     
     /// <summary>
@@ -34,6 +24,7 @@ namespace WpfApplication1
             FirstName = selectedItem.FirstName;
             LastName = selectedItem.LastName;
             Online = selectedItem.Online;
+
         }
 
         public UserContact(Guid id, string nickname, string firstName, string lastName, bool online)
@@ -66,9 +57,51 @@ namespace WpfApplication1
         
         public static List<User> Contacts;
         public Guid CurrentUserId;
-        public  ObservableCollection<UserContact> NicknameList; 
+        public  ObservableCollection<UserContact> NicknameList;
+        public List<Guid> ChatStartedGuids; 
 
-       // 
+       //   
+        public HubConnection HubConnection;
+        public IHubProxy HubProxy;
+
+        public async void StartConnection()
+        {
+            HubConnection = new HubConnection("http://localhost:5661/signalr");
+            HubProxy = HubConnection.CreateHubProxy("ChatHub");
+
+            await HubConnection.Start();
+            await HubProxy.Invoke("Connect", CurrentUserId.ToString());
+            HubProxy.On<string, string>("addMessage", (senderGuid, message) =>
+            {
+                Guid sender = Guid.Parse(senderGuid);
+                string nickName = "somebody";
+                if (ChatStartedGuids.IndexOf(sender) != 0)
+                {
+                    foreach (UserContact user in NicknameList)
+                    {
+                        if (user.Id == sender)
+                        {
+                            nickName = user.Nickname;
+                        }
+                    }
+                    string text = "Вы получили новое сообщение от " + nickName;
+                    MessageBox.Show(text, "Новое сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    return;
+                }
+
+            });
+            HubProxy.On<string>("onContactConnected", (guid) =>
+            {
+                Dispatcher.Invoke(RefreshContacts);
+            });
+            HubProxy.On<string>("onContactDisconnected", (guid) =>
+            {
+                Dispatcher.Invoke(RefreshContacts);
+            });
+        }
 
         public void RefreshContacts()
         {
@@ -103,10 +136,10 @@ namespace WpfApplication1
             InitializeComponent();
             Contacts = new List<User>();
             NicknameList = new ObservableCollection<UserContact>();
+            ChatStartedGuids = new List<Guid>();
             RefreshContacts();
-           // ContactGrid.DataContext = Contacts;
-            //ContactGrid.ItemsSource = NicknameList;
-            
+            StartConnection();
+
         }
 
         private void AddContact_Click(object sender, RoutedEventArgs e)
@@ -131,11 +164,17 @@ namespace WpfApplication1
             {
                 if (cont.Nickname == login)
                 {
-                    Chat chat = new Chat(CurrentUserId, cont.Id);
+                    var chat = new Chat(CurrentUserId, cont.Id, cont.Nickname, this);
+                    ChatStartedGuids.Add(cont.Id);
                     chat.Show();
                     break;
                 }
             }
+        }
+
+        private void ContactList_Closed(object sender, EventArgs e)
+        {
+            HubConnection.Stop();
         } 
     }
 }

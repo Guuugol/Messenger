@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Client.Server;
+using Client.Service_References.Server;
 using Newtonsoft.Json;
-using WpfApplication1;
 
 
 namespace Client
@@ -39,7 +38,7 @@ namespace Client
 
     public class ServerClient
     {
-        private Client.Server.ServiceSoapClient _serverClient;
+        private ServiceSoapClient _serverClient;
 
         public ServerClient()
         {

@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Channels;
-using System.Threading.Tasks;
-using System.Windows;
-using Client;
-using Client.Server;
-using Microsoft.AspNet.SignalR.Client;
+﻿using System.Windows;
 
-
-namespace WpfApplication1
+namespace Client
 {
     /// <summary>
     /// Логика взаимодействия для App.xaml

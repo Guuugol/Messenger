@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.Server {
+namespace Client.Service_References.Server {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -17,52 +17,52 @@ namespace Client.Server {
         
         // CODEGEN: Контракт генерации сообщений с именем nickname из пространства имен http://tempuri.org/ не отмечен как обнуляемый
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Authorize", ReplyAction="*")]
-        Client.Server.AuthorizeResponse Authorize(Client.Server.AuthorizeRequest request);
+        AuthorizeResponse Authorize(AuthorizeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Authorize", ReplyAction="*")]
-        System.Threading.Tasks.Task<Client.Server.AuthorizeResponse> AuthorizeAsync(Client.Server.AuthorizeRequest request);
+        System.Threading.Tasks.Task<AuthorizeResponse> AuthorizeAsync(AuthorizeRequest request);
         
         // CODEGEN: Контракт генерации сообщений с именем nickname из пространства имен http://tempuri.org/ не отмечен как обнуляемый
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Register", ReplyAction="*")]
-        Client.Server.RegisterResponse Register(Client.Server.RegisterRequest request);
+        RegisterResponse Register(RegisterRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Register", ReplyAction="*")]
-        System.Threading.Tasks.Task<Client.Server.RegisterResponse> RegisterAsync(Client.Server.RegisterRequest request);
+        System.Threading.Tasks.Task<RegisterResponse> RegisterAsync(RegisterRequest request);
         
         // CODEGEN: Контракт генерации сообщений с именем GetUserContactsResult из пространства имен http://tempuri.org/ не отмечен как обнуляемый
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserContacts", ReplyAction="*")]
-        Client.Server.GetUserContactsResponse GetUserContacts(Client.Server.GetUserContactsRequest request);
+        GetUserContactsResponse GetUserContacts(GetUserContactsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserContacts", ReplyAction="*")]
-        System.Threading.Tasks.Task<Client.Server.GetUserContactsResponse> GetUserContactsAsync(Client.Server.GetUserContactsRequest request);
+        System.Threading.Tasks.Task<GetUserContactsResponse> GetUserContactsAsync(GetUserContactsRequest request);
         
         // CODEGEN: Контракт генерации сообщений с именем contactNickname из пространства имен http://tempuri.org/ не отмечен как обнуляемый
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddNewContact", ReplyAction="*")]
-        Client.Server.AddNewContactResponse AddNewContact(Client.Server.AddNewContactRequest request);
+        AddNewContactResponse AddNewContact(AddNewContactRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddNewContact", ReplyAction="*")]
-        System.Threading.Tasks.Task<Client.Server.AddNewContactResponse> AddNewContactAsync(Client.Server.AddNewContactRequest request);
+        System.Threading.Tasks.Task<AddNewContactResponse> AddNewContactAsync(AddNewContactRequest request);
         
         // CODEGEN: Контракт генерации сообщений с именем DeleteContactResult из пространства имен http://tempuri.org/ не отмечен как обнуляемый
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteContact", ReplyAction="*")]
-        Client.Server.DeleteContactResponse DeleteContact(Client.Server.DeleteContactRequest request);
+        DeleteContactResponse DeleteContact(DeleteContactRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteContact", ReplyAction="*")]
-        System.Threading.Tasks.Task<Client.Server.DeleteContactResponse> DeleteContactAsync(Client.Server.DeleteContactRequest request);
+        System.Threading.Tasks.Task<DeleteContactResponse> DeleteContactAsync(DeleteContactRequest request);
         
         // CODEGEN: Контракт генерации сообщений с именем GetMessageHistoryResult из пространства имен http://tempuri.org/ не отмечен как обнуляемый
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetMessageHistory", ReplyAction="*")]
-        Client.Server.GetMessageHistoryResponse GetMessageHistory(Client.Server.GetMessageHistoryRequest request);
+        GetMessageHistoryResponse GetMessageHistory(GetMessageHistoryRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetMessageHistory", ReplyAction="*")]
-        System.Threading.Tasks.Task<Client.Server.GetMessageHistoryResponse> GetMessageHistoryAsync(Client.Server.GetMessageHistoryRequest request);
+        System.Threading.Tasks.Task<GetMessageHistoryResponse> GetMessageHistoryAsync(GetMessageHistoryRequest request);
         
         // CODEGEN: Контракт генерации сообщений с именем GetUserByGuidResult из пространства имен http://tempuri.org/ не отмечен как обнуляемый
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserByGuid", ReplyAction="*")]
-        Client.Server.GetUserByGuidResponse GetUserByGuid(Client.Server.GetUserByGuidRequest request);
+        GetUserByGuidResponse GetUserByGuid(GetUserByGuidRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserByGuid", ReplyAction="*")]
-        System.Threading.Tasks.Task<Client.Server.GetUserByGuidResponse> GetUserByGuidAsync(Client.Server.GetUserByGuidRequest request);
+        System.Threading.Tasks.Task<GetUserByGuidResponse> GetUserByGuidAsync(GetUserByGuidRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -72,12 +72,12 @@ namespace Client.Server {
     public partial class AuthorizeRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="Authorize", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.AuthorizeRequestBody Body;
+        public AuthorizeRequestBody Body;
         
         public AuthorizeRequest() {
         }
         
-        public AuthorizeRequest(Client.Server.AuthorizeRequestBody Body) {
+        public AuthorizeRequest(AuthorizeRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -110,12 +110,12 @@ namespace Client.Server {
     public partial class AuthorizeResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="AuthorizeResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.AuthorizeResponseBody Body;
+        public AuthorizeResponseBody Body;
         
         public AuthorizeResponse() {
         }
         
-        public AuthorizeResponse(Client.Server.AuthorizeResponseBody Body) {
+        public AuthorizeResponse(AuthorizeResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -144,12 +144,12 @@ namespace Client.Server {
     public partial class RegisterRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="Register", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.RegisterRequestBody Body;
+        public RegisterRequestBody Body;
         
         public RegisterRequest() {
         }
         
-        public RegisterRequest(Client.Server.RegisterRequestBody Body) {
+        public RegisterRequest(RegisterRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -194,12 +194,12 @@ namespace Client.Server {
     public partial class RegisterResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="RegisterResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.RegisterResponseBody Body;
+        public RegisterResponseBody Body;
         
         public RegisterResponse() {
         }
         
-        public RegisterResponse(Client.Server.RegisterResponseBody Body) {
+        public RegisterResponse(RegisterResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -228,12 +228,12 @@ namespace Client.Server {
     public partial class GetUserContactsRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserContacts", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.GetUserContactsRequestBody Body;
+        public GetUserContactsRequestBody Body;
         
         public GetUserContactsRequest() {
         }
         
-        public GetUserContactsRequest(Client.Server.GetUserContactsRequestBody Body) {
+        public GetUserContactsRequest(GetUserContactsRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -262,12 +262,12 @@ namespace Client.Server {
     public partial class GetUserContactsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserContactsResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.GetUserContactsResponseBody Body;
+        public GetUserContactsResponseBody Body;
         
         public GetUserContactsResponse() {
         }
         
-        public GetUserContactsResponse(Client.Server.GetUserContactsResponseBody Body) {
+        public GetUserContactsResponse(GetUserContactsResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -296,12 +296,12 @@ namespace Client.Server {
     public partial class AddNewContactRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="AddNewContact", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.AddNewContactRequestBody Body;
+        public AddNewContactRequestBody Body;
         
         public AddNewContactRequest() {
         }
         
-        public AddNewContactRequest(Client.Server.AddNewContactRequestBody Body) {
+        public AddNewContactRequest(AddNewContactRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -338,12 +338,12 @@ namespace Client.Server {
     public partial class AddNewContactResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="AddNewContactResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.AddNewContactResponseBody Body;
+        public AddNewContactResponseBody Body;
         
         public AddNewContactResponse() {
         }
         
-        public AddNewContactResponse(Client.Server.AddNewContactResponseBody Body) {
+        public AddNewContactResponse(AddNewContactResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -372,12 +372,12 @@ namespace Client.Server {
     public partial class DeleteContactRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="DeleteContact", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.DeleteContactRequestBody Body;
+        public DeleteContactRequestBody Body;
         
         public DeleteContactRequest() {
         }
         
-        public DeleteContactRequest(Client.Server.DeleteContactRequestBody Body) {
+        public DeleteContactRequest(DeleteContactRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -410,12 +410,12 @@ namespace Client.Server {
     public partial class DeleteContactResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="DeleteContactResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.DeleteContactResponseBody Body;
+        public DeleteContactResponseBody Body;
         
         public DeleteContactResponse() {
         }
         
-        public DeleteContactResponse(Client.Server.DeleteContactResponseBody Body) {
+        public DeleteContactResponse(DeleteContactResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -444,12 +444,12 @@ namespace Client.Server {
     public partial class GetMessageHistoryRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetMessageHistory", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.GetMessageHistoryRequestBody Body;
+        public GetMessageHistoryRequestBody Body;
         
         public GetMessageHistoryRequest() {
         }
         
-        public GetMessageHistoryRequest(Client.Server.GetMessageHistoryRequestBody Body) {
+        public GetMessageHistoryRequest(GetMessageHistoryRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -482,12 +482,12 @@ namespace Client.Server {
     public partial class GetMessageHistoryResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetMessageHistoryResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.GetMessageHistoryResponseBody Body;
+        public GetMessageHistoryResponseBody Body;
         
         public GetMessageHistoryResponse() {
         }
         
-        public GetMessageHistoryResponse(Client.Server.GetMessageHistoryResponseBody Body) {
+        public GetMessageHistoryResponse(GetMessageHistoryResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -516,12 +516,12 @@ namespace Client.Server {
     public partial class GetUserByGuidRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserByGuid", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.GetUserByGuidRequestBody Body;
+        public GetUserByGuidRequestBody Body;
         
         public GetUserByGuidRequest() {
         }
         
-        public GetUserByGuidRequest(Client.Server.GetUserByGuidRequestBody Body) {
+        public GetUserByGuidRequest(GetUserByGuidRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -550,12 +550,12 @@ namespace Client.Server {
     public partial class GetUserByGuidResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetUserByGuidResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Client.Server.GetUserByGuidResponseBody Body;
+        public GetUserByGuidResponseBody Body;
         
         public GetUserByGuidResponse() {
         }
         
-        public GetUserByGuidResponse(Client.Server.GetUserByGuidResponseBody Body) {
+        public GetUserByGuidResponse(GetUserByGuidResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -578,12 +578,12 @@ namespace Client.Server {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ServiceSoapChannel : Client.Server.ServiceSoap, System.ServiceModel.IClientChannel {
+    public interface ServiceSoapChannel : ServiceSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceSoapClient : System.ServiceModel.ClientBase<Client.Server.ServiceSoap>, Client.Server.ServiceSoap {
+    public partial class ServiceSoapClient : System.ServiceModel.ClientBase<ServiceSoap>, ServiceSoap {
         
         public ServiceSoapClient() {
         }
@@ -605,196 +605,196 @@ namespace Client.Server {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.Server.AuthorizeResponse Client.Server.ServiceSoap.Authorize(Client.Server.AuthorizeRequest request) {
+        AuthorizeResponse ServiceSoap.Authorize(AuthorizeRequest request) {
             return base.Channel.Authorize(request);
         }
         
         public string Authorize(string nickname, string password) {
-            Client.Server.AuthorizeRequest inValue = new Client.Server.AuthorizeRequest();
-            inValue.Body = new Client.Server.AuthorizeRequestBody();
+            AuthorizeRequest inValue = new AuthorizeRequest();
+            inValue.Body = new AuthorizeRequestBody();
             inValue.Body.nickname = nickname;
             inValue.Body.password = password;
-            Client.Server.AuthorizeResponse retVal = ((Client.Server.ServiceSoap)(this)).Authorize(inValue);
+            AuthorizeResponse retVal = ((ServiceSoap)(this)).Authorize(inValue);
             return retVal.Body.AuthorizeResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.Server.AuthorizeResponse> Client.Server.ServiceSoap.AuthorizeAsync(Client.Server.AuthorizeRequest request) {
+        System.Threading.Tasks.Task<AuthorizeResponse> ServiceSoap.AuthorizeAsync(AuthorizeRequest request) {
             return base.Channel.AuthorizeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.Server.AuthorizeResponse> AuthorizeAsync(string nickname, string password) {
-            Client.Server.AuthorizeRequest inValue = new Client.Server.AuthorizeRequest();
-            inValue.Body = new Client.Server.AuthorizeRequestBody();
+        public System.Threading.Tasks.Task<AuthorizeResponse> AuthorizeAsync(string nickname, string password) {
+            AuthorizeRequest inValue = new AuthorizeRequest();
+            inValue.Body = new AuthorizeRequestBody();
             inValue.Body.nickname = nickname;
             inValue.Body.password = password;
-            return ((Client.Server.ServiceSoap)(this)).AuthorizeAsync(inValue);
+            return ((ServiceSoap)(this)).AuthorizeAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.Server.RegisterResponse Client.Server.ServiceSoap.Register(Client.Server.RegisterRequest request) {
+        RegisterResponse ServiceSoap.Register(RegisterRequest request) {
             return base.Channel.Register(request);
         }
         
         public string Register(string nickname, string password, string firstName, string lastName, string info) {
-            Client.Server.RegisterRequest inValue = new Client.Server.RegisterRequest();
-            inValue.Body = new Client.Server.RegisterRequestBody();
+            RegisterRequest inValue = new RegisterRequest();
+            inValue.Body = new RegisterRequestBody();
             inValue.Body.nickname = nickname;
             inValue.Body.password = password;
             inValue.Body.firstName = firstName;
             inValue.Body.lastName = lastName;
             inValue.Body.info = info;
-            Client.Server.RegisterResponse retVal = ((Client.Server.ServiceSoap)(this)).Register(inValue);
+            RegisterResponse retVal = ((ServiceSoap)(this)).Register(inValue);
             return retVal.Body.RegisterResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.Server.RegisterResponse> Client.Server.ServiceSoap.RegisterAsync(Client.Server.RegisterRequest request) {
+        System.Threading.Tasks.Task<RegisterResponse> ServiceSoap.RegisterAsync(RegisterRequest request) {
             return base.Channel.RegisterAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.Server.RegisterResponse> RegisterAsync(string nickname, string password, string firstName, string lastName, string info) {
-            Client.Server.RegisterRequest inValue = new Client.Server.RegisterRequest();
-            inValue.Body = new Client.Server.RegisterRequestBody();
+        public System.Threading.Tasks.Task<RegisterResponse> RegisterAsync(string nickname, string password, string firstName, string lastName, string info) {
+            RegisterRequest inValue = new RegisterRequest();
+            inValue.Body = new RegisterRequestBody();
             inValue.Body.nickname = nickname;
             inValue.Body.password = password;
             inValue.Body.firstName = firstName;
             inValue.Body.lastName = lastName;
             inValue.Body.info = info;
-            return ((Client.Server.ServiceSoap)(this)).RegisterAsync(inValue);
+            return ((ServiceSoap)(this)).RegisterAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.Server.GetUserContactsResponse Client.Server.ServiceSoap.GetUserContacts(Client.Server.GetUserContactsRequest request) {
+        GetUserContactsResponse ServiceSoap.GetUserContacts(GetUserContactsRequest request) {
             return base.Channel.GetUserContacts(request);
         }
         
         public string GetUserContacts(System.Guid guid) {
-            Client.Server.GetUserContactsRequest inValue = new Client.Server.GetUserContactsRequest();
-            inValue.Body = new Client.Server.GetUserContactsRequestBody();
+            GetUserContactsRequest inValue = new GetUserContactsRequest();
+            inValue.Body = new GetUserContactsRequestBody();
             inValue.Body.guid = guid;
-            Client.Server.GetUserContactsResponse retVal = ((Client.Server.ServiceSoap)(this)).GetUserContacts(inValue);
+            GetUserContactsResponse retVal = ((ServiceSoap)(this)).GetUserContacts(inValue);
             return retVal.Body.GetUserContactsResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.Server.GetUserContactsResponse> Client.Server.ServiceSoap.GetUserContactsAsync(Client.Server.GetUserContactsRequest request) {
+        System.Threading.Tasks.Task<GetUserContactsResponse> ServiceSoap.GetUserContactsAsync(GetUserContactsRequest request) {
             return base.Channel.GetUserContactsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.Server.GetUserContactsResponse> GetUserContactsAsync(System.Guid guid) {
-            Client.Server.GetUserContactsRequest inValue = new Client.Server.GetUserContactsRequest();
-            inValue.Body = new Client.Server.GetUserContactsRequestBody();
+        public System.Threading.Tasks.Task<GetUserContactsResponse> GetUserContactsAsync(System.Guid guid) {
+            GetUserContactsRequest inValue = new GetUserContactsRequest();
+            inValue.Body = new GetUserContactsRequestBody();
             inValue.Body.guid = guid;
-            return ((Client.Server.ServiceSoap)(this)).GetUserContactsAsync(inValue);
+            return ((ServiceSoap)(this)).GetUserContactsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.Server.AddNewContactResponse Client.Server.ServiceSoap.AddNewContact(Client.Server.AddNewContactRequest request) {
+        AddNewContactResponse ServiceSoap.AddNewContact(AddNewContactRequest request) {
             return base.Channel.AddNewContact(request);
         }
         
         public string AddNewContact(System.Guid userGuid, string contactNickname, string name) {
-            Client.Server.AddNewContactRequest inValue = new Client.Server.AddNewContactRequest();
-            inValue.Body = new Client.Server.AddNewContactRequestBody();
+            AddNewContactRequest inValue = new AddNewContactRequest();
+            inValue.Body = new AddNewContactRequestBody();
             inValue.Body.userGuid = userGuid;
             inValue.Body.contactNickname = contactNickname;
             inValue.Body.name = name;
-            Client.Server.AddNewContactResponse retVal = ((Client.Server.ServiceSoap)(this)).AddNewContact(inValue);
+            AddNewContactResponse retVal = ((ServiceSoap)(this)).AddNewContact(inValue);
             return retVal.Body.AddNewContactResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.Server.AddNewContactResponse> Client.Server.ServiceSoap.AddNewContactAsync(Client.Server.AddNewContactRequest request) {
+        System.Threading.Tasks.Task<AddNewContactResponse> ServiceSoap.AddNewContactAsync(AddNewContactRequest request) {
             return base.Channel.AddNewContactAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.Server.AddNewContactResponse> AddNewContactAsync(System.Guid userGuid, string contactNickname, string name) {
-            Client.Server.AddNewContactRequest inValue = new Client.Server.AddNewContactRequest();
-            inValue.Body = new Client.Server.AddNewContactRequestBody();
+        public System.Threading.Tasks.Task<AddNewContactResponse> AddNewContactAsync(System.Guid userGuid, string contactNickname, string name) {
+            AddNewContactRequest inValue = new AddNewContactRequest();
+            inValue.Body = new AddNewContactRequestBody();
             inValue.Body.userGuid = userGuid;
             inValue.Body.contactNickname = contactNickname;
             inValue.Body.name = name;
-            return ((Client.Server.ServiceSoap)(this)).AddNewContactAsync(inValue);
+            return ((ServiceSoap)(this)).AddNewContactAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.Server.DeleteContactResponse Client.Server.ServiceSoap.DeleteContact(Client.Server.DeleteContactRequest request) {
+        DeleteContactResponse ServiceSoap.DeleteContact(DeleteContactRequest request) {
             return base.Channel.DeleteContact(request);
         }
         
         public string DeleteContact(System.Guid userGuid, System.Guid contactGuid) {
-            Client.Server.DeleteContactRequest inValue = new Client.Server.DeleteContactRequest();
-            inValue.Body = new Client.Server.DeleteContactRequestBody();
+            DeleteContactRequest inValue = new DeleteContactRequest();
+            inValue.Body = new DeleteContactRequestBody();
             inValue.Body.userGuid = userGuid;
             inValue.Body.contactGuid = contactGuid;
-            Client.Server.DeleteContactResponse retVal = ((Client.Server.ServiceSoap)(this)).DeleteContact(inValue);
+            DeleteContactResponse retVal = ((ServiceSoap)(this)).DeleteContact(inValue);
             return retVal.Body.DeleteContactResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.Server.DeleteContactResponse> Client.Server.ServiceSoap.DeleteContactAsync(Client.Server.DeleteContactRequest request) {
+        System.Threading.Tasks.Task<DeleteContactResponse> ServiceSoap.DeleteContactAsync(DeleteContactRequest request) {
             return base.Channel.DeleteContactAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.Server.DeleteContactResponse> DeleteContactAsync(System.Guid userGuid, System.Guid contactGuid) {
-            Client.Server.DeleteContactRequest inValue = new Client.Server.DeleteContactRequest();
-            inValue.Body = new Client.Server.DeleteContactRequestBody();
+        public System.Threading.Tasks.Task<DeleteContactResponse> DeleteContactAsync(System.Guid userGuid, System.Guid contactGuid) {
+            DeleteContactRequest inValue = new DeleteContactRequest();
+            inValue.Body = new DeleteContactRequestBody();
             inValue.Body.userGuid = userGuid;
             inValue.Body.contactGuid = contactGuid;
-            return ((Client.Server.ServiceSoap)(this)).DeleteContactAsync(inValue);
+            return ((ServiceSoap)(this)).DeleteContactAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.Server.GetMessageHistoryResponse Client.Server.ServiceSoap.GetMessageHistory(Client.Server.GetMessageHistoryRequest request) {
+        GetMessageHistoryResponse ServiceSoap.GetMessageHistory(GetMessageHistoryRequest request) {
             return base.Channel.GetMessageHistory(request);
         }
         
         public string GetMessageHistory(System.Guid userGuid, System.Guid contactGuid) {
-            Client.Server.GetMessageHistoryRequest inValue = new Client.Server.GetMessageHistoryRequest();
-            inValue.Body = new Client.Server.GetMessageHistoryRequestBody();
+            GetMessageHistoryRequest inValue = new GetMessageHistoryRequest();
+            inValue.Body = new GetMessageHistoryRequestBody();
             inValue.Body.userGuid = userGuid;
             inValue.Body.contactGuid = contactGuid;
-            Client.Server.GetMessageHistoryResponse retVal = ((Client.Server.ServiceSoap)(this)).GetMessageHistory(inValue);
+            GetMessageHistoryResponse retVal = ((ServiceSoap)(this)).GetMessageHistory(inValue);
             return retVal.Body.GetMessageHistoryResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.Server.GetMessageHistoryResponse> Client.Server.ServiceSoap.GetMessageHistoryAsync(Client.Server.GetMessageHistoryRequest request) {
+        System.Threading.Tasks.Task<GetMessageHistoryResponse> ServiceSoap.GetMessageHistoryAsync(GetMessageHistoryRequest request) {
             return base.Channel.GetMessageHistoryAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.Server.GetMessageHistoryResponse> GetMessageHistoryAsync(System.Guid userGuid, System.Guid contactGuid) {
-            Client.Server.GetMessageHistoryRequest inValue = new Client.Server.GetMessageHistoryRequest();
-            inValue.Body = new Client.Server.GetMessageHistoryRequestBody();
+        public System.Threading.Tasks.Task<GetMessageHistoryResponse> GetMessageHistoryAsync(System.Guid userGuid, System.Guid contactGuid) {
+            GetMessageHistoryRequest inValue = new GetMessageHistoryRequest();
+            inValue.Body = new GetMessageHistoryRequestBody();
             inValue.Body.userGuid = userGuid;
             inValue.Body.contactGuid = contactGuid;
-            return ((Client.Server.ServiceSoap)(this)).GetMessageHistoryAsync(inValue);
+            return ((ServiceSoap)(this)).GetMessageHistoryAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.Server.GetUserByGuidResponse Client.Server.ServiceSoap.GetUserByGuid(Client.Server.GetUserByGuidRequest request) {
+        GetUserByGuidResponse ServiceSoap.GetUserByGuid(GetUserByGuidRequest request) {
             return base.Channel.GetUserByGuid(request);
         }
         
         public string GetUserByGuid(System.Guid guid) {
-            Client.Server.GetUserByGuidRequest inValue = new Client.Server.GetUserByGuidRequest();
-            inValue.Body = new Client.Server.GetUserByGuidRequestBody();
+            GetUserByGuidRequest inValue = new GetUserByGuidRequest();
+            inValue.Body = new GetUserByGuidRequestBody();
             inValue.Body.guid = guid;
-            Client.Server.GetUserByGuidResponse retVal = ((Client.Server.ServiceSoap)(this)).GetUserByGuid(inValue);
+            GetUserByGuidResponse retVal = ((ServiceSoap)(this)).GetUserByGuid(inValue);
             return retVal.Body.GetUserByGuidResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.Server.GetUserByGuidResponse> Client.Server.ServiceSoap.GetUserByGuidAsync(Client.Server.GetUserByGuidRequest request) {
+        System.Threading.Tasks.Task<GetUserByGuidResponse> ServiceSoap.GetUserByGuidAsync(GetUserByGuidRequest request) {
             return base.Channel.GetUserByGuidAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.Server.GetUserByGuidResponse> GetUserByGuidAsync(System.Guid guid) {
-            Client.Server.GetUserByGuidRequest inValue = new Client.Server.GetUserByGuidRequest();
-            inValue.Body = new Client.Server.GetUserByGuidRequestBody();
+        public System.Threading.Tasks.Task<GetUserByGuidResponse> GetUserByGuidAsync(System.Guid guid) {
+            GetUserByGuidRequest inValue = new GetUserByGuidRequest();
+            inValue.Body = new GetUserByGuidRequestBody();
             inValue.Body.guid = guid;
-            return ((Client.Server.ServiceSoap)(this)).GetUserByGuidAsync(inValue);
+            return ((ServiceSoap)(this)).GetUserByGuidAsync(inValue);
         }
     }
 }

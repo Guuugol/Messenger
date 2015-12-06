@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfApplication1.ContactInformation"
+﻿<Window x:Class="Client.ContactInformation"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Contact Information" Height="461" Background="#FF4D4A4A" ResizeMode="NoResize" Width="768">
