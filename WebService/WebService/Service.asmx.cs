@@ -140,19 +140,20 @@ namespace WebService
             }
             return JsonConvert.SerializeObject(new JsonResult(data));
         }
-/*
         [WebMethod]
         public string AddNewContact(Guid userGuid, string contactNickname, string name)
         {
             try
             {
-                User contact = DB.User.First(u => u.Nickname == contactNickname);
-                DB.Contact.Add(new Contact
+                User contact = _db.User.First(u => u.Nickname == contactNickname);
+                _db.Contact.Add(new Contact
                 {
                     UserID = userGuid,
                     ContactID = contact.ID,
-                    Name = name
+                    Name = name,
+                    ID = Guid.NewGuid()
                 });
+                _db.SaveChanges();
                 return JsonConvert.SerializeObject(new JsonResult(new List<Dictionary<string, object>>()));
             }
             catch (Exception)
@@ -161,9 +162,9 @@ namespace WebService
                     JsonConvert.SerializeObject(
                         new JsonResult("unknown error occured while adding a new record in data base"));
             }
-        }*/
+        }
 
-        [WebMethod]
+       /* [WebMethod]
         public string AddNewContact(Guid userId,string contactNickname)
         {
             try
@@ -184,7 +185,7 @@ namespace WebService
                     JsonConvert.SerializeObject(
                         new JsonResult("unknown error occured while adding a new record in data base"));
             }
-        }
+        }*/
 
         [WebMethod]
         public string DeleteContact(Guid userGuid, Guid contactGuid)

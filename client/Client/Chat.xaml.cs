@@ -27,28 +27,28 @@ namespace WpfApplication1
         public Guid ContactId;
         public Guid UserId;
         public String ContactNick;
-        private List<Dictionary<string, object>> MessageHistory;
+        private readonly List<Dictionary<string, object>> _messageHistory;
 
-        public HubConnection hubConnection;
-        public IHubProxy hubProxy;
+        public HubConnection HubConnection;
+        public IHubProxy HubProxy;
         
         public Chat(Guid userId ,Guid contactId)
         {
             InitializeComponent();
             ContactId = contactId;
             UserId = userId;
-            MessageHistory = new List<Dictionary<string, object>>();
-            MessageHistory = MainWindow.ServerClient.GetMessageHistory(UserId, ContactId);
-            refresh();
-            startConnection();
+            _messageHistory = new List<Dictionary<string, object>>();
+            _messageHistory = MainWindow.ServerClient.GetMessageHistory(UserId, ContactId);
+            Refresh();
+            StartConnection();
 
         }
 
-        public void refresh()
+        public void Refresh()
         {
             Dispatcher.BeginInvoke(new ThreadStart(delegate
             {
-                foreach (var message in MessageHistory)
+                foreach (var message in _messageHistory)
                 {
                     Guid from = Guid.Parse((string) message["fromId"]);
                     Guid to = Guid.Parse((string) message["toId"]);
@@ -63,25 +63,34 @@ namespace WpfApplication1
 
         }
 
-        public async void startConnection()
+        public async void StartConnection()
         {
-            hubConnection = new HubConnection("http://localhost:5661/signalr");
-            hubProxy = hubConnection.CreateHubProxy("ChatHub");
+            HubConnection = new HubConnection("http://localhost:5661/signalr");
+            HubProxy = HubConnection.CreateHubProxy("ChatHub");
 
-            await hubConnection.Start();
-            await hubProxy.Invoke("Connect", UserId.ToString());
-            hubProxy.On<string, string>("addMessage", (senderGuid, message) =>
+            await HubConnection.Start();
+            await HubProxy.Invoke("Connect", UserId.ToString());
+            HubProxy.On<string, string>("addMessage", (senderGuid, message) =>
             {
-                var fullText = "Я: ";
-                fullText += message;
-                this.Dispatcher.Invoke(()=> ChatBlock.AppendText(fullText + "\n") );
+                if (Guid.Parse(senderGuid) == ContactId)
+                {
+                    var fullText = ContactNick + ": ";
+                    fullText += message;
+                    this.Dispatcher.Invoke(() => ChatBlock.AppendText(fullText + "\n"));
+                }
+                else
+                {
+                    return;
+                }
+                
             });
         }
 
         async private void Send_Click(object sender, RoutedEventArgs e)
         {
             string messageText = MessageBlock.Text;
-            ChatBlock.AppendText(messageText);
+            string fullText = "Я: " + messageText;
+            ChatBlock.AppendText(fullText);
 
             /*Connection connection = new HubConnection("http://localhost:5661/signalr");*/
 
@@ -93,7 +102,7 @@ namespace WpfApplication1
                 {"text", messageText}
             });
 
-            await hubProxy.Invoke("Send", new String[] {UserId.ToString(), ContactId.ToString(), messageText});
+            await HubProxy.Invoke("Send", new String[] {UserId.ToString(), ContactId.ToString(), messageText});
 
             MessageBlock.Clear();
 

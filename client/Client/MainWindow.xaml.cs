@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,19 +25,37 @@ namespace WpfApplication1
     /// </summary>
     public class UserContact
     {
-        public UserContact(string name, Guid id)
+
+        public UserContact(UserContact selectedItem)
         {
-            Name = name;
+            Id = selectedItem.Id;
+            Nickname = selectedItem.Nickname;
+            FirstName = selectedItem.FirstName;
+            LastName = selectedItem.LastName;
+            Online = selectedItem.Online;
+        }
+
+        public UserContact(Guid id, string nickname, string firstName, string lastName, bool online)
+        {
             Id = id;
+            Nickname = nickname;
+            FirstName = firstName;
+            LastName = lastName;
+            Online = online ? "online" : "offline";
+
         }
 
-        public UserContact(UserContact user)
+        public UserContact()
         {
-            Name = user.Name;
+            throw new NotImplementedException();
         }
 
-        public String Name { get; set; }
-        private Guid Id { get; set; }
+        public System.Guid Id { get; set; }
+        public string Nickname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Online { get; set; }
+        
     }
     
     public partial class MainWindow : Window
@@ -57,11 +76,12 @@ namespace WpfApplication1
             NicknameList.Clear();
             foreach (var user in data.Select(dict => new User
             {
-                ID = Guid.Parse((string)dict["userId"]),
+                Id = Guid.Parse((string)dict["userId"]),
                 Nickname = (string)dict["nickname"],
                 FirstName = (string)dict["firstName"],
                 LastName = (string)dict["lastName"],
-                Info = (string)dict["info"]
+                Info = (string)dict["info"],
+                Online = (bool)dict["online"]
             }))
             {
                 Contacts.Add(user);
@@ -69,9 +89,10 @@ namespace WpfApplication1
 
             foreach (var user in Contacts)
             {
-                NicknameList.Add(new UserContact(user.Nickname, user.ID) );
+                NicknameList.Add(new UserContact(user.Id, user.Nickname, user.FirstName, user.LastName, user.Online));
             }
-            
+            ((ArrayList)ContactListView.Resources["UserContacts"]).AddRange(NicknameList);
+            ContactListView.ItemsSource = NicknameList;
         }
 
         
@@ -83,7 +104,7 @@ namespace WpfApplication1
             NicknameList = new List<UserContact>();
             RefreshContacts();
            // ContactGrid.DataContext = Contacts;
-            ContactGrid.ItemsSource = NicknameList;
+            //ContactGrid.ItemsSource = NicknameList;
             
         }
 
@@ -95,20 +116,46 @@ namespace WpfApplication1
 
         }
 
-        private void ContactGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        
+
+
+        /*private void SetDataGrid(List<Dictionary<string, object>> users)
         {
-            UserContact contact = new UserContact( (UserContact) ContactGrid.SelectedCells.First().Item);
-            string login = contact.Name;
+            if (users == null || !users.Any()) return;
+            var userlist = users.Select(item => new UserContact()
+            {
+                Id = Guid.Parse((string)item["User_id"]),
+                Nickname = (string)item["Nickname"],
+                FirstName = (string)item["FirstName"],
+                LastName = (string)item["LastName"],
+                Online = (string)item["Online"]
+            }).ToList();
+            ((ArrayList)ContactListView.Resources["Users"]).AddRange(userlist);
+            ContactListView.ItemsSource = userlist;
+        }*/
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
+        private void ContactListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            UserContact contact = new UserContact((UserContact)ContactListView.SelectedItem);
+            string login = contact.Nickname;
             foreach (var cont in Contacts)
             {
                 if (cont.Nickname == login)
                 {
-                    Chat chat = new Chat(CurrentUserId, cont.ID);
+                    Chat chat = new Chat(CurrentUserId, cont.Id);
                     chat.Show();
                     break;
                 }
             }
         }
-
+    
+    
     }
+
+
 }

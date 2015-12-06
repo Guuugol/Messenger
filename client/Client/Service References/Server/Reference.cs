@@ -313,17 +313,21 @@ namespace Client.Server {
     public partial class AddNewContactRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public System.Guid userId;
+        public System.Guid userGuid;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public string contactNickname;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string name;
+        
         public AddNewContactRequestBody() {
         }
         
-        public AddNewContactRequestBody(System.Guid userId, string contactNickname) {
-            this.userId = userId;
+        public AddNewContactRequestBody(System.Guid userGuid, string contactNickname, string name) {
+            this.userGuid = userGuid;
             this.contactNickname = contactNickname;
+            this.name = name;
         }
     }
     
@@ -690,11 +694,12 @@ namespace Client.Server {
             return base.Channel.AddNewContact(request);
         }
         
-        public string AddNewContact(System.Guid userId, string contactNickname) {
+        public string AddNewContact(System.Guid userGuid, string contactNickname, string name) {
             Client.Server.AddNewContactRequest inValue = new Client.Server.AddNewContactRequest();
             inValue.Body = new Client.Server.AddNewContactRequestBody();
-            inValue.Body.userId = userId;
+            inValue.Body.userGuid = userGuid;
             inValue.Body.contactNickname = contactNickname;
+            inValue.Body.name = name;
             Client.Server.AddNewContactResponse retVal = ((Client.Server.ServiceSoap)(this)).AddNewContact(inValue);
             return retVal.Body.AddNewContactResult;
         }
@@ -704,11 +709,12 @@ namespace Client.Server {
             return base.Channel.AddNewContactAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.Server.AddNewContactResponse> AddNewContactAsync(System.Guid userId, string contactNickname) {
+        public System.Threading.Tasks.Task<Client.Server.AddNewContactResponse> AddNewContactAsync(System.Guid userGuid, string contactNickname, string name) {
             Client.Server.AddNewContactRequest inValue = new Client.Server.AddNewContactRequest();
             inValue.Body = new Client.Server.AddNewContactRequestBody();
-            inValue.Body.userId = userId;
+            inValue.Body.userGuid = userGuid;
             inValue.Body.contactNickname = contactNickname;
+            inValue.Body.name = name;
             return ((Client.Server.ServiceSoap)(this)).AddNewContactAsync(inValue);
         }
         

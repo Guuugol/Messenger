@@ -20,12 +20,13 @@ namespace Client
             this.Message1 = new HashSet<Message>();
         }
 
-        public System.Guid ID { get; set; }
+        public System.Guid Id { get; set; }
         public string Nickname { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Info { get; set; }
+        public bool Online { get; set; }
 
         public virtual ICollection<Contact> Contact { get; set; }
         public virtual ICollection<Contact> Contact1 { get; set; }

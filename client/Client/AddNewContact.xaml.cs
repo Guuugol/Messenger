@@ -23,12 +23,12 @@ namespace Client
 
         public MainWindow MainWindow;
 
-        private Guid CurrentUserId;
+        private readonly Guid _currentUserId;
 
         public AddNewContact(MainWindow mainWindow, Guid userId)
         {
             MainWindow = mainWindow;
-            CurrentUserId = userId;
+            _currentUserId = userId;
             InitializeComponent();
         }
 
@@ -40,9 +40,11 @@ namespace Client
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             var login = TbLoginBox.Text;
-            if (login == null)
+            var nickname = TbNicknameBox.Text;
+
+            if (login == null || nickname == null)
             {
-                MessageBox.Show("Введите логин", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Заполните оба поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             if (MainWindow.Contacts.Any())
             {
@@ -52,8 +54,14 @@ namespace Client
                         MessageBoxImage.Error);
                     TbLoginBox.Clear();
                 }
+                 if (MainWindow.NicknameList.Any(user => user.Nickname == login))
+                {
+                    MessageBox.Show("Данный никнейм  уже занят", "Ошибка", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    TbLoginBox.Clear();
+                }
             }
-            var result = MainWindow.ServerClient.AddNewContact(login, CurrentUserId);
+            var result = MainWindow.ServerClient.AddNewContact(login, _currentUserId, nickname);
             if (!result)
             {
                 MessageBox.Show("Невозможно добавить пользователя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -64,6 +72,11 @@ namespace Client
                 MessageBox.Show("Контакт успешно добавлен", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
+        }
+
+        private void AddNewContact1_Closed(object sender, EventArgs e)
+        {
+            MainWindow.RefreshContacts();
         }
 
 
