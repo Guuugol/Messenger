@@ -20,7 +20,7 @@ namespace Client
             this.Message1 = new HashSet<Message>();
         }
 
-        public System.Guid Id { get; set; }
+        public Guid Id { get; set; }
         public string Nickname { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }

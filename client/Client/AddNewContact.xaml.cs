@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WpfApplication1;
 
 namespace Client
 {
@@ -45,6 +44,7 @@ namespace Client
             if (login == null || nickname == null)
             {
                 MessageBox.Show("Заполните оба поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             if (MainWindow.Contacts.Any())
             {
@@ -53,12 +53,14 @@ namespace Client
                     MessageBox.Show("Данный пользователь уже добавлен", "Ошибка", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     TbLoginBox.Clear();
+                    return;
                 }
                  if (MainWindow.NicknameList.Any(user => user.Nickname == login))
                 {
                     MessageBox.Show("Данный никнейм  уже занят", "Ошибка", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     TbLoginBox.Clear();
+                    return;
                 }
             }
             var result = MainWindow.ServerClient.AddNewContact(login, _currentUserId, nickname);
@@ -66,6 +68,7 @@ namespace Client
             {
                 MessageBox.Show("Невозможно добавить пользователя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 TbLoginBox.Clear();
+                return;
             }
             else
             {

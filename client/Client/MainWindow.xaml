@@ -1,8 +1,8 @@
-﻿<Window x:Name="ContactList" x:Class="WpfApplication1.MainWindow" 
+﻿<Window x:Name="ContactList" x:Class="Client.MainWindow" 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
-        Title="Contact List" Height="387.612" Width="312.005" OpacityMask="#FF4D4A4A" SizeToContent="Width" ResizeMode="NoResize">
+        Title="Contact List" Height="387.612" Width="312.005" OpacityMask="#FF4D4A4A" SizeToContent="Width" ResizeMode="NoResize" Closed="ContactList_Closed">
     <Grid x:Name="ScreebGrid" Background="#FF4D4A4A" OpacityMask="#FF4D4A4A">
         <Grid.RowDefinitions>
             <RowDefinition Height="51*"/>

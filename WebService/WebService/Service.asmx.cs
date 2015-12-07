@@ -158,6 +158,29 @@ namespace WebService
             }
         }
 
+        [WebMethod]
+        public string DeleteMessageHistory(string userGuid, string contactGuid)
+        {
+            try
+            {
+                Guid userGuidCasted=Guid.Parse(userGuid);
+                Guid contacGuidCasted=Guid.Parse(contactGuid);
+                var messages =
+                    _db.Message.Where(
+                        m =>
+                            (((m.FromID == userGuidCasted) && (m.ToID == contacGuidCasted)) ||
+                             ((m.ToID == userGuidCasted) && (m.FromID == contacGuidCasted))));
+                _db.Message.RemoveRange(messages);
+                return JsonConvert.SerializeObject(new JsonResult(new List<Dictionary<string, object>>()));
+            }
+            catch
+            {
+                return
+                    JsonConvert.SerializeObject(
+                        new JsonResult("unknown error"));
+            }
+        }
+
        /* [WebMethod]
         public string AddNewContact(Guid userId,string contactNickname)
         {
