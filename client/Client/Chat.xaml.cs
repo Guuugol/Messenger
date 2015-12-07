@@ -48,7 +48,7 @@ namespace Client
                     var fullText = from == ContactId ? ContactNick + ": " : "Я: ";
                     fullText += text;
                     ChatBlock.AppendText(fullText + "\n");
-
+                    ChatBlock.ScrollToEnd();
                 }
             }));
 
