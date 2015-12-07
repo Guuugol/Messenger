@@ -185,6 +185,8 @@ namespace Client
 
         private void ContactListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (ContactListView.SelectedItem == null)
+                return;
             UserContact contact = new UserContact((UserContact)ContactListView.SelectedItem);
             string login = contact.Nickname;
             foreach (var cont in Contacts)
@@ -196,6 +198,7 @@ namespace Client
                     chat.Uid = cont.Id.ToString();
                     ChatWindows.Add(chat);
                     chat.Show();
+                    ContactListView.SelectedItem = null;
                     break;
                 }
             }
