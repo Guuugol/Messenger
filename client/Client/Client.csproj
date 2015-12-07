@@ -177,7 +177,7 @@
     <None Include="Service References\Server\Client.Server.RegisterResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\Server\Service.wsdl" />
+    <None Include="Service References\Server\Service1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -187,9 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\Server\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\Server\Service.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\Server\configuration91.svcinfo" />
@@ -215,6 +212,7 @@
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
+    <None Include="Service References\Server\Service1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
