@@ -58,7 +58,8 @@ namespace Client
         public static List<User> Contacts;
         public Guid CurrentUserId;
         public  ObservableCollection<UserContact> NicknameList;
-        public List<Guid> ChatStartedGuids; 
+        public List<Guid> ChatStartedGuids;
+        public List<Chat> ChatWindows; 
 
        //   
         public HubConnection HubConnection;
@@ -75,7 +76,35 @@ namespace Client
             {
                 Guid sender = Guid.Parse(senderGuid);
                 string nickName = "somebody";
-                if (ChatStartedGuids.IndexOf(sender) != 0)
+                if (ChatStartedGuids.Exists(x => x == sender))
+                {
+                    foreach (UserContact user in NicknameList)
+                    {
+                        if (user.Id == sender)
+                        {
+                            nickName = user.Nickname;
+                        }
+                    }
+                    bool sended = false;
+                    foreach (var chat in ChatWindows)
+                    {
+                        if (chat.ContactId == Guid.Parse(senderGuid))
+                        {
+                            var fullText = nickName + ": ";
+                            fullText += message;
+                            var chat1 = chat;
+                            this.Dispatcher.Invoke(() => chat1.AppendText(fullText + "\n"));
+                            sended = true;
+                        }
+                    }
+                    /*if (!sended)
+                    {
+                        string text = "Вы получили новое сообщение от " + nickName;
+                        MessageBox.Show(text, "Новое сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }*/
+                    
+                }
+                else
                 {
                     foreach (UserContact user in NicknameList)
                     {
@@ -86,10 +115,6 @@ namespace Client
                     }
                     string text = "Вы получили новое сообщение от " + nickName;
                     MessageBox.Show(text, "Новое сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    return;
                 }
 
             });
@@ -137,6 +162,8 @@ namespace Client
             Contacts = new List<User>();
             NicknameList = new ObservableCollection<UserContact>();
             ChatStartedGuids = new List<Guid>();
+            ChatWindows = new List<Chat>();
+
             RefreshContacts();
             StartConnection();
 
@@ -166,6 +193,8 @@ namespace Client
                 {
                     var chat = new Chat(CurrentUserId, cont.Id, cont.Nickname, this);
                     ChatStartedGuids.Add(cont.Id);
+                    chat.Uid = cont.Id.ToString();
+                    ChatWindows.Add(chat);
                     chat.Show();
                     break;
                 }

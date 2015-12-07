@@ -61,7 +61,7 @@ namespace Client
 
             await HubConnection.Start();
             await HubProxy.Invoke("Connect", UserId.ToString());
-            HubProxy.On<string, string>("addMessage", (senderGuid, message) =>
+           /* HubProxy.On<string, string>("addMessage", (senderGuid, message) =>
             {
                 if (Guid.Parse(senderGuid) == ContactId)
                 {
@@ -74,7 +74,7 @@ namespace Client
                     return;
                 }
                 
-            });
+            });*/
         }
 
         async private void Send_Click(object sender, RoutedEventArgs e)
@@ -82,7 +82,7 @@ namespace Client
             string messageText = MessageBlock.Text;
             string fullText = "Я: " + messageText;
             ChatBlock.AppendText(fullText + "\n");
-
+            ChatBlock.ScrollToEnd();
             /*Connection connection = new HubConnection("http://localhost:5661/signalr");*/
 
             List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
@@ -103,8 +103,14 @@ namespace Client
         private void Window_Closed(object sender, EventArgs e)
         {
             parent.ChatStartedGuids.Remove(ContactId);
+            parent.ChatWindows.Remove(this);
         }
 
+        public void AppendText(string text)
+        {
+            this.ChatBlock.AppendText(text);
+            this.ChatBlock.ScrollToEnd();
+        }
 
 
     }
