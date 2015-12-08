@@ -14,7 +14,7 @@
             <Button x:Name="DeleteContact" Content="Delete" HorizontalAlignment="Left" Width="100"  Height="26" Margin="0,12,0,13" Click="DeleteContact_Click" />
             <Button x:Name="Exit" Content="Exit" Margin="0,12,0,13" Width="89" Click="Exit_Click"/>
         </ToolBarPanel>
-        <telerik:RadGridView x:Name="ContactListView" Margin="10" Grid.Row="1" ItemsSource="{DynamicResource UserContacts}" MouseDoubleClick="ContactListView_MouseDoubleClick">
+        <telerik:RadGridView x:Name="ContactListView" Margin="10" Grid.Row="1" ItemsSource="{DynamicResource UserContacts}" MouseDoubleClick="ContactListView_MouseDoubleClick" IsReadOnly="True">
 
             <telerik:RadGridView.Resources>
                 <collections:ArrayList x:Key="UserContacts" />

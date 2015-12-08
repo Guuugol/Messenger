@@ -26,6 +26,7 @@ namespace Client
             ContactId = contactId;
             UserId = userId;
             ContactNick = contactNickname;
+            Title = "Chat with " + ContactNick;
             NameLabel.Content = contactNickname;
             parent = parentMainWindow;
             _messageHistory = new List<Dictionary<string, object>>();
@@ -39,6 +40,7 @@ namespace Client
         {
             Dispatcher.BeginInvoke(new ThreadStart(delegate
             {
+                ChatBlock.Document.Blocks.Clear();
                 foreach (var message in _messageHistory)
                 {
                     Guid from = Guid.Parse((string) message["fromId"]);
@@ -47,7 +49,7 @@ namespace Client
                     var recieved = message["recieved"];
                     var fullText = from == ContactId ? ContactNick + ": " : "Я: ";
                     fullText += text;
-                    ChatBlock.AppendText(fullText + "\n");
+                    ChatBlock.AppendText(fullText + "\n" + "\n");
                     ChatBlock.ScrollToEnd();
                 }
             }));
@@ -81,7 +83,8 @@ namespace Client
         {
             string messageText = MessageBlock.Text;
             string fullText = "Я: " + messageText;
-            ChatBlock.AppendText(fullText + "\n");
+            //ChatBlock.AppendText("\n");
+            ChatBlock.AppendText(fullText + "\n" + "\n");
             ChatBlock.ScrollToEnd();
             /*Connection connection = new HubConnection("http://localhost:5661/signalr");*/
 
@@ -102,14 +105,32 @@ namespace Client
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            HubConnection.Stop();
+            ChatBlock.Document.Blocks.Clear();
             parent.ChatStartedGuids.Remove(ContactId);
             parent.ChatWindows.Remove(this);
         }
 
         public void AppendText(string text)
         {
-            this.ChatBlock.AppendText(text);
-            this.ChatBlock.ScrollToEnd();
+            ChatBlock.AppendText(text);
+            ChatBlock.ScrollToEnd();
+        }
+
+        async private void ClearHistory_Click(object sender, RoutedEventArgs e)
+        {
+
+            bool res = MainWindow.ServerClient.DeleteMessageHistory(UserId, ContactId);
+            if (res)
+            {
+                ChatBlock.Document.Blocks.Clear();
+                //Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Не удалось очистить историю", "Ошиька", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
 

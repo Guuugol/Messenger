@@ -104,5 +104,12 @@ namespace Client
             var res = JsonConvert.DeserializeObject<JsonResult>(json);
             return res.Success;
         }
+
+        public bool DeleteMessageHistory(Guid userId, Guid contactId)
+        {
+            var json = _serverClient.DeleteMessageHistory(userId.ToString(), contactId.ToString());
+            var res = JsonConvert.DeserializeObject<JsonResult>(json);
+            return res.Success;
+        }
     }
 }

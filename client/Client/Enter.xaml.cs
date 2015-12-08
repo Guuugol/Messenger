@@ -43,7 +43,7 @@ namespace Client
             {
                 _userId = (Guid) result;
                 this.Hide();
-                var contatcs = new MainWindow(_userId);
+                var contatcs = new MainWindow(_userId, login);
                 contatcs.Activate();
                 contatcs.Show();
                 this.Close();

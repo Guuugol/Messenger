@@ -97,7 +97,7 @@ namespace Client
                             var fullText = nickName + ": ";
                             fullText += message;
                             var chat1 = chat;
-                            this.Dispatcher.Invoke(() => chat1.AppendText(fullText + "\n"));
+                            Dispatcher.Invoke(() => chat1.AppendText(fullText + "\n" + "\n"));
                             sended = true;
                         }
                     }
@@ -159,7 +159,7 @@ namespace Client
         }
 
         
-        public MainWindow(Guid userId)
+        public MainWindow(Guid userId, String login)
         {
             CurrentUserId = userId;
             InitializeComponent();
@@ -167,7 +167,7 @@ namespace Client
             NicknameList = new ObservableCollection<UserContact>();
             ChatStartedGuids = new List<Guid>();
             ChatWindows = new List<Chat>();
-
+            Title = "Contact list of " + login;
             RefreshContacts();
             StartConnection();
 

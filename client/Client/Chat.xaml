@@ -4,9 +4,10 @@
         Title="Chat" Height="407" Width="631" ResizeMode="NoResize" Closed="Window_Closed">
     <Grid Background="#FF4D4A4A">
         <RichTextBox x:Name="ChatBlock" Margin="24,10,25,104"  Background="#FFF5ECEC"/>
-        <TextBox x:Name="MessageBlock" Margin="125,293,25,10" TextWrapping="Wrap" Background="#FFF1E6E6"/>
-        <Button x:Name="Send" Content="Send" Height="76" Width="101" Click="Send_Click" Margin="24,296,500,10"/>
+        <TextBox x:Name="MessageBlock" Margin="289,296,10,7" TextWrapping="Wrap" Background="#FFF1E6E6"/>
+        <Button x:Name="Send" Content="Send" Height="76" Width="101" Click="Send_Click" Margin="188,299,336,7"/>
         <Label x:Name ="NameLabel" Content="" HorizontalAlignment="Left" Height="33" Margin="87,-23,0,0" VerticalAlignment="Top" Width="252" FontWeight="Bold" FontSize="16"/>
+        <Button x:Name="ClearHistory" Content="Clear" Height="76" Width="101" Margin="24,296,500,10" Click="ClearHistory_Click"/>
 
     </Grid>
 </Window>
