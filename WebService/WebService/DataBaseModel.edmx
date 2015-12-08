@@ -24,6 +24,8 @@
           <Property Name="Text" Type="text" />
           <Property Name="Recieved" Type="tinyint" Nullable="false" />
           <Property Name="Date_time" Type="datetime" />
+          <Property Name="DeletedBySender" Type="tinyint" Nullable="false" />
+          <Property Name="DeletedByReciever" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -143,6 +145,8 @@
           <NavigationProperty Name="User1" Relationship="Self.FK_Message_ToID" FromRole="Message" ToRole="User" />
           <Property Name="Recieved" Type="Byte" Nullable="false" />
           <Property Name="Date_time" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBySender" Type="Byte" Nullable="false" />
+          <Property Name="DeletedByReciever" Type="Byte" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -258,6 +262,8 @@
           <EntitySetMapping Name="Message">
             <EntityTypeMapping TypeName="MessengerModel.Message">
               <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="DeletedByReciever" ColumnName="DeletedByReciever" />
+                <ScalarProperty Name="DeletedBySender" ColumnName="DeletedBySender" />
                 <ScalarProperty Name="Date_time" ColumnName="Date_time" />
                 <ScalarProperty Name="Recieved" ColumnName="Recieved" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

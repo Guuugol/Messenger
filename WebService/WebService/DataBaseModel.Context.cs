@@ -13,10 +13,10 @@ namespace WebService
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MessengerEntities : DbContext
+    public partial class MessengerEntities1 : DbContext
     {
-        public MessengerEntities()
-            : base("name=MessengerEntities")
+        public MessengerEntities1()
+            : base("name=MessengerEntities1")
         {
         }
     

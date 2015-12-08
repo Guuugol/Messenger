@@ -56,7 +56,7 @@ namespace WebService
     public class Service : System.Web.Services.WebService
     {
 
-        private readonly MessengerEntities _db = new MessengerEntities();
+        private readonly MessengerEntities1 _db = new MessengerEntities1();
 
 
         [WebMethod]
@@ -165,12 +165,22 @@ namespace WebService
             {
                 Guid userGuidCasted=Guid.Parse(userGuid);
                 Guid contacGuidCasted=Guid.Parse(contactGuid);
-                var messages =
+                var messagesFrom =
                     _db.Message.Where(
                         m =>
-                            (((m.FromID == userGuidCasted) && (m.ToID == contacGuidCasted)) ||
-                             ((m.ToID == userGuidCasted) && (m.FromID == contacGuidCasted))));
-                _db.Message.RemoveRange(messages);
+                            (((m.FromID == userGuidCasted) && (m.ToID == contacGuidCasted))));
+                var messagesTo=_db.Message.Where(
+                        m =>((m.ToID == userGuidCasted) && (m.FromID == contacGuidCasted)));
+
+                foreach (var message in messagesFrom)
+                {
+                    message.DeletedBySender = 1;
+                }
+                foreach (var message in messagesTo)
+                {
+                    message.DeletedByReciever = 1;
+                }
+                _db.SaveChanges();
                 return JsonConvert.SerializeObject(new JsonResult(new List<Dictionary<string, object>>()));
             }
             catch
@@ -232,8 +242,8 @@ namespace WebService
                     var message in
                         _db.Message.Where(
                             m =>
-                                (((m.FromID == userGuid) && (m.ToID == contactGuid)) ||
-                                 ((m.ToID == userGuid) && (m.FromID == contactGuid)))).OrderBy(m=>m.Date_time))
+                                (((m.DeletedBySender==0)&&(m.FromID == userGuid) && (m.ToID == contactGuid)) ||
+                                 ((m.DeletedByReciever==0)&&(m.ToID == userGuid) && (m.FromID == contactGuid)))).OrderBy(m=>m.Date_time))
                 {
                     message.Recieved = 1;
                     data.Add(new Dictionary<string, object>

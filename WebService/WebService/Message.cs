@@ -19,7 +19,9 @@ namespace WebService
         public System.Guid ToID { get; set; }
         public string Text { get; set; }
         public byte Recieved { get; set; }
-        public System.DateTime Date_time { get; set; }
+        public Nullable<System.DateTime> Date_time { get; set; }
+        public byte DeletedBySender { get; set; }
+        public byte DeletedByReciever { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

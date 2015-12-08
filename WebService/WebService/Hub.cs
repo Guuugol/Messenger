@@ -29,7 +29,7 @@ namespace WebService
             }
             else
                 recieved = false;
-            using (var db=new MessengerEntities())
+            using (var db=new MessengerEntities1())
             {
                 db.Message.Add(new Message
                 {
@@ -58,7 +58,7 @@ namespace WebService
             }
             Clients.Caller.onConnected(id, guid, Users);
             Guid userGuid = Guid.Parse(guid);
-            using (var db = new MessengerEntities())
+            using (var db = new MessengerEntities1())
             {
                 foreach (var reciever in (from u in db.User
                                           from c in db.Contact
@@ -87,7 +87,7 @@ namespace WebService
             {
                 
                 Guid userGuid=Guid.Parse(item.Guid);
-                using (var db = new MessengerEntities())
+                using (var db = new MessengerEntities1())
                 {
                     foreach (var reciever in (from u in db.User
                         from c in db.Contact
