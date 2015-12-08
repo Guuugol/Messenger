@@ -97,5 +97,12 @@ namespace Client
             var res = JsonConvert.DeserializeObject<JsonResult>(json);
             return (List<Dictionary<string, object>>) res.Data;
         }
+
+        public bool DeleteContact(Guid userId, Guid contactId)
+        {
+            var json = _serverClient.DeleteContact(userId, contactId);
+            var res = JsonConvert.DeserializeObject<JsonResult>(json);
+            return res.Success;
+        }
     }
 }

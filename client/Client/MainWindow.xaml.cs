@@ -42,12 +42,16 @@ namespace Client
             throw new NotImplementedException();
         }
 
-        public System.Guid Id { get; set; }
+        private System.Guid Id { get; set; }
         public string Nickname { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Online { get; set; }
-        
+
+        public Guid GetId()
+        {
+            return Id;
+        }
     }
     
     public partial class MainWindow : Window
@@ -80,7 +84,7 @@ namespace Client
                 {
                     foreach (UserContact user in NicknameList)
                     {
-                        if (user.Id == sender)
+                        if (user.GetId() == sender)
                         {
                             nickName = user.Nickname;
                         }
@@ -108,7 +112,7 @@ namespace Client
                 {
                     foreach (UserContact user in NicknameList)
                     {
-                        if (user.Id == sender)
+                        if (user.GetId() == sender)
                         {
                             nickName = user.Nickname;
                         }
@@ -207,6 +211,40 @@ namespace Client
         private void ContactList_Closed(object sender, EventArgs e)
         {
             HubConnection.Stop();
+        }
+
+        private void DeleteContact_Click(object sender, RoutedEventArgs e)
+        {
+            if (ContactListView.SelectedItem == null)
+                return;
+            UserContact contact = new UserContact((UserContact)ContactListView.SelectedItem);
+            string login = contact.Nickname;
+            Guid contactId = contact.GetId();
+            foreach (var cont in Contacts)
+            {
+                if (cont.Nickname == login)
+                {
+                    MessageBoxResult dialogResult = MessageBox.Show("Вы хотите удалить контакт " + login, "Удаление контакта", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                    if (dialogResult == MessageBoxResult.Cancel)
+                        return;
+                    if (dialogResult == MessageBoxResult.OK)
+                    {
+                        var result = ServerClient.DeleteContact(CurrentUserId, contactId);
+                        if (!result)
+                        {
+                            MessageBox.Show("Невозможно добавить пользователя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Контакт успешно добавлен", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+
+                    }
+                    ContactListView.SelectedItem = null;
+                    RefreshContacts();
+                    break;
+                }
+            }
         } 
     }
 }

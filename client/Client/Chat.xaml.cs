@@ -56,7 +56,7 @@ namespace Client
 
         public async void StartConnection()
         {
-            HubConnection = new HubConnection("http://192.168.1.6/webservice/signalr");
+            HubConnection = new HubConnection("http://localhost:5661/signalr");
             HubProxy = HubConnection.CreateHubProxy("ChatHub");
 
             await HubConnection.Start();

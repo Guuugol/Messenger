@@ -210,6 +210,7 @@ namespace WebService
             try
             {
                 _db.Contact.Remove(_db.Contact.First(c => ((c.UserID == userGuid) && (c.ContactID == contactGuid))));
+                _db.SaveChanges();
                 return JsonConvert.SerializeObject(new JsonResult(new List<Dictionary<string, object>>()));
             }
             catch (Exception)
